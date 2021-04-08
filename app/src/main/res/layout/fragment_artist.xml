@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.fragments.ArtistFragment">
+
+    <TextView
+        android:id="@+id/tv_artist_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_padding_size_medium"
+        style="@style/main_text"
+        android:textAlignment="center"/>
+
+    <ImageView
+        android:id="@+id/artist_picture"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"/>
+
+    <Button
+        android:id="@+id/btn_show_trackList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Показать трек лист"
+        android:backgroundTint="@color/pink_main"/>
+
+</LinearLayout>
