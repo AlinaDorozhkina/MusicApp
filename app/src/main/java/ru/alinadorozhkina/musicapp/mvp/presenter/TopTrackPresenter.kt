@@ -54,8 +54,11 @@ class TopTrackPresenter(
         val disposable = topTracksRepoRetrofit.getTopTracks()
             .observeOn(uiSchedular)
             .subscribe({
-                it.data?.let { it1 -> topTrackListPresenter.tracks.addAll(it1)
-                viewState.updateList()}
+                it.data?.let { it1 ->
+                    topTrackListPresenter.tracks.addAll(it1)
+                    viewState.setTopTrackAmount(it.total)
+                    viewState.updateList()
+                }
             }, {
                 Log.v("Presenter", "ошибка" + it.message)
                 print(it.message)

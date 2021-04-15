@@ -16,19 +16,22 @@ import ru.alinadorozhkina.musicapp.api.ApiHolder
 import ru.alinadorozhkina.musicapp.databinding.FragmentArtistBinding
 import ru.alinadorozhkina.musicapp.databinding.FragmentArtistTracksBinding
 import ru.alinadorozhkina.musicapp.mvp.model.entity.Artist
+import ru.alinadorozhkina.musicapp.mvp.model.entity.room.db.DataBase
 import ru.alinadorozhkina.musicapp.mvp.model.repo.RetrofitTrackListRepo
 import ru.alinadorozhkina.musicapp.mvp.model.view.TrackLisView
 import ru.alinadorozhkina.musicapp.mvp.presenter.ArtistTracksPresenter
+import ru.alinadorozhkina.musicapp.ui.App
 import ru.alinadorozhkina.musicapp.ui.adapters.ArtistTracksRVAdapter
 import ru.alinadorozhkina.musicapp.ui.image.GlideImageLoader
+import ru.alinadorozhkina.musicapp.ui.network.AndroidNetworkStatus
 
 private const val ARTIST_VALUE = "artist value"
 class ArtistTracksFragment : MvpAppCompatFragment(), TrackLisView {
 
     companion object {
-        fun newInstance(url: String): ArtistTracksFragment {
+        fun newInstance(artist: Artist): ArtistTracksFragment {
             val args = Bundle()
-            args.putString(ARTIST_VALUE, url)
+            args.putParcelable(ARTIST_VALUE, artist)
             val f = ArtistTracksFragment()
             f.arguments = args
             return f
@@ -36,15 +39,14 @@ class ArtistTracksFragment : MvpAppCompatFragment(), TrackLisView {
     }
 
     private var ui: FragmentArtistTracksBinding? = null
-    private val presenter by  moxyPresenter { ArtistTracksPresenter(
-        RetrofitTrackListRepo(ApiHolder.api),
+    private val presenter by  moxyPresenter {
+        val artist = arguments?.getParcelable<Artist>(ARTIST_VALUE) as Artist
+        ArtistTracksPresenter(
+        RetrofitTrackListRepo(ApiHolder.api, AndroidNetworkStatus(App.instance), DataBase.getInstance()),
         AndroidSchedulers.mainThread(),
-        url
+        artist
     ) }
     private var adapter: ArtistTracksRVAdapter? = null
-
-    private val url: String?
-        get() = arguments?.getString(ARTIST_VALUE)
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -6,6 +6,6 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Chart (
-    @Expose val data: List<Track>? = null,
-    @Expose val total: Int? = null
+    @Expose val data: List<Track>,
+    @Expose val total: Int
         ): Parcelable

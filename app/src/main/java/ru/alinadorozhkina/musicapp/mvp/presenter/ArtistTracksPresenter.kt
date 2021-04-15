@@ -14,12 +14,12 @@ import ru.alinadorozhkina.musicapp.mvp.presenter.list.ITrackListItemPresenter
 class ArtistTracksPresenter(
     val trackListRepoRetrofit: ITrackListRepo,
     val uiSchedular: Scheduler,
-    val url: String?,
+    val artist: Artist,
 ): MvpPresenter<TrackLisView>() {
 
     class ArtistTracksListPresenter: ITrackListItemPresenter{
         val tracks = mutableListOf<ArtistTrack>()
-        override var itemClickListener: ((ITrackListItemView) -> Unit)?=null
+        override var itemClickListener: ((ITrackListItemView) -> Unit)? = null
 
         override fun bindView(view: ITrackListItemView) {
             val track = tracks[view.pos]
@@ -41,7 +41,7 @@ class ArtistTracksPresenter(
     }
 
     private fun loadTracks() {
-        val disposable = url?.let {
+        val disposable = artist.let {
             trackListRepoRetrofit.getTrackList(it)
                 .observeOn(uiSchedular)
                 .subscribe({

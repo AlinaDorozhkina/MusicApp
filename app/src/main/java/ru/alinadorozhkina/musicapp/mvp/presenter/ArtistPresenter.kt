@@ -10,10 +10,10 @@ class ArtistPresenter(val artist: Artist, val router: Router, val screens: IScre
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        artist?.let { viewState.setArtistName(it.name) }
+        artist.let { viewState.setArtistName(it.name) }
     }
 
     fun buttonTrackListClicked(){
-        router.navigateTo(screens.artistTracks(artist.tracklist))
+        router.navigateTo(screens.artistTracks(artist))
     }
 }

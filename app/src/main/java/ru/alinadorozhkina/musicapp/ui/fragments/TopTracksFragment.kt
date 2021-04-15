@@ -13,6 +13,7 @@ import moxy.ktx.moxyPresenter
 import ru.alinadorozhkina.musicapp.R
 import ru.alinadorozhkina.musicapp.api.ApiHolder
 import ru.alinadorozhkina.musicapp.databinding.FragmentTopTracksBinding
+import ru.alinadorozhkina.musicapp.mvp.model.entity.room.db.DataBase
 import ru.alinadorozhkina.musicapp.mvp.model.repo.RetrofitTopTracksRepo
 import ru.alinadorozhkina.musicapp.mvp.model.view.TopTrackView
 import ru.alinadorozhkina.musicapp.mvp.presenter.TopTrackPresenter
@@ -20,13 +21,14 @@ import ru.alinadorozhkina.musicapp.ui.App
 import ru.alinadorozhkina.musicapp.ui.adapters.TopTracksRVAdapter
 import ru.alinadorozhkina.musicapp.ui.image.GlideImageLoader
 import ru.alinadorozhkina.musicapp.ui.navigation.AndroidScreens
+import ru.alinadorozhkina.musicapp.ui.network.AndroidNetworkStatus
 
 
 class TopTracksFragment : MvpAppCompatFragment(), TopTrackView {
 
     private val presenter by moxyPresenter {
         TopTrackPresenter(
-            RetrofitTopTracksRepo(ApiHolder.api),
+            RetrofitTopTracksRepo(ApiHolder.api, AndroidNetworkStatus(App.instance), DataBase.getInstance()),
             AndroidSchedulers.mainThread(),
             App.instance.router,
             AndroidScreens()
@@ -48,6 +50,10 @@ class TopTracksFragment : MvpAppCompatFragment(), TopTrackView {
 
     companion object {
         fun newInstance() = TopTracksFragment()
+    }
+
+    override fun setTopTrackAmount(total: Int) {
+        ui?.tvTopAmount?.text = " TОП $total лучших треков"
     }
 
     override fun init() {

@@ -6,6 +6,7 @@ import moxy.viewstate.strategy.StateStrategyType
 
 @StateStrategyType(AddToEndSingleStrategy::class)
 interface TopTrackView: MvpView {
+    fun setTopTrackAmount(total: Int)
     fun init()
     fun updateList()
 }
