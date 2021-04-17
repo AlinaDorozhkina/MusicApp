@@ -1,5 +1,6 @@
 package ru.alinadorozhkina.musicapp.ui.fragments
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,7 +8,9 @@ import kotlinx.android.synthetic.main.fragment_artist.*
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import ru.alinadorozhkina.musicapp.databinding.FragmentArtistBinding
+import ru.alinadorozhkina.musicapp.mvp.model.cache.room.RoomImageCache
 import ru.alinadorozhkina.musicapp.mvp.model.entity.Artist
+import ru.alinadorozhkina.musicapp.mvp.model.entity.room.db.DataBase
 import ru.alinadorozhkina.musicapp.mvp.model.view.ArtistView
 import ru.alinadorozhkina.musicapp.mvp.presenter.ArtistPresenter
 import ru.alinadorozhkina.musicapp.ui.App
@@ -32,7 +35,7 @@ class ArtistFragment : MvpAppCompatFragment(), ArtistView {
 
     private val presenter by moxyPresenter {
         val artist = arguments?.getParcelable<Artist>(ARTIST_VALUE) as Artist
-        ArtistPresenter( artist, App.instance.router, AndroidScreens()) }
+        ArtistPresenter( artist, App.instance.router, AndroidScreens(), RoomImageCache(DataBase.getInstance(), App.instance.cacheDir )) }
 
 
     override fun onCreateView(
@@ -54,7 +57,7 @@ class ArtistFragment : MvpAppCompatFragment(), ArtistView {
         tv_artist_name?.text = name
     }
 
-    override fun setArtistPicture() {
-        TODO("Not yet implemented")
+    override fun setArtistPicture(bitmap: Bitmap) {
+        ui?.artistPicture?.setImageBitmap(bitmap)
     }
 }

@@ -15,6 +15,7 @@ import ru.alinadorozhkina.musicapp.R
 import ru.alinadorozhkina.musicapp.api.ApiHolder
 import ru.alinadorozhkina.musicapp.databinding.FragmentArtistBinding
 import ru.alinadorozhkina.musicapp.databinding.FragmentArtistTracksBinding
+import ru.alinadorozhkina.musicapp.mvp.model.cache.room.RoomImageCache
 import ru.alinadorozhkina.musicapp.mvp.model.entity.Artist
 import ru.alinadorozhkina.musicapp.mvp.model.entity.room.db.DataBase
 import ru.alinadorozhkina.musicapp.mvp.model.repo.RetrofitTrackListRepo
@@ -59,7 +60,8 @@ class ArtistTracksFragment : MvpAppCompatFragment(), TrackLisView {
     override fun init() = with(ui) {
         rv_artist_tracks.layoutManager = LinearLayoutManager(requireContext())
         rv_artist_tracks.addItemDecoration((DividerItemDecoration(requireActivity(), LinearLayoutManager.VERTICAL)))
-        adapter = ArtistTracksRVAdapter(presenter.trackListPresenter, GlideImageLoader() )
+        adapter = ArtistTracksRVAdapter(presenter.trackListPresenter, GlideImageLoader(RoomImageCache(
+            DataBase.getInstance(), App.instance.cacheDir), AndroidNetworkStatus(requireContext())) )
         rv_artist_tracks.adapter=adapter
     }
 

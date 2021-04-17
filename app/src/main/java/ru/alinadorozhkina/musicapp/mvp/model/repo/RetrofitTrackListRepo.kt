@@ -26,7 +26,6 @@ class RetrofitTrackListRepo(
                         Single.fromCallable {
                             val art = RoomArtist(artist.id, artist.name, artist.picture, artist.tracklist)
                             db.artistDao.insert(art)
-
                             val roomArtist =
                                 artist.name.let { db.artistDao.findByName(it) }
                             val roomArtistTrack = artistTrackList.data.map {
