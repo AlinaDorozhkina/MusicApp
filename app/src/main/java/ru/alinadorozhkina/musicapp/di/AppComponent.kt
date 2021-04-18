@@ -8,6 +8,7 @@ import ru.alinadorozhkina.musicapp.mvp.presenter.MainPresenter
 import ru.alinadorozhkina.musicapp.mvp.presenter.TopTrackPresenter
 import ru.alinadorozhkina.musicapp.ui.activities.MainActivity
 
+@SuperScope
 @Component(
     modules = [
         AppModule::class,

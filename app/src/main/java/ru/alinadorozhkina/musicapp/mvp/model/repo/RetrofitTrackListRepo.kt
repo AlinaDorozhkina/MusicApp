@@ -17,7 +17,7 @@ class RetrofitTrackListRepo(
             artist.tracklist.let { url ->
                 api.getTrackList(url)
                     .flatMap { artistTrackList ->
-                        cache.putArtist(artist)
+                        //cache.putArtist(artist)
                         cache.putArtistTrackList(artist, artistTrackList)
                             .toSingleDefault(artistTrackList)
                     }

@@ -9,6 +9,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.alinadorozhkina.musicapp.api.IDataSource
+import ru.alinadorozhkina.musicapp.di.SuperScope
 import ru.alinadorozhkina.musicapp.mvp.model.network.INetworkStatus
 import ru.alinadorozhkina.musicapp.ui.App
 import ru.alinadorozhkina.musicapp.ui.network.AndroidNetworkStatus
@@ -16,6 +17,7 @@ import ru.alinadorozhkina.musicapp.ui.network.AndroidNetworkStatus
 @Module
 class ApiModule {
 
+    @SuperScope
     @Provides
     fun api(gson: Gson): IDataSource = Retrofit.Builder()
         .baseUrl("https://api.deezer.com")
@@ -24,12 +26,14 @@ class ApiModule {
         .build()
         .create(IDataSource::class.java)
 
+    @SuperScope
     @Provides
     fun gson(): Gson = GsonBuilder()
         .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
         .excludeFieldsWithoutExposeAnnotation()
         .create()
 
+    @SuperScope
     @Provides
     fun networkStatus(app: App): INetworkStatus = AndroidNetworkStatus(app)
 

@@ -5,6 +5,7 @@ import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
 import dagger.Module
 import dagger.Provides
+import ru.alinadorozhkina.musicapp.di.SuperScope
 import ru.alinadorozhkina.musicapp.mvp.navigation.IScreens
 import ru.alinadorozhkina.musicapp.ui.navigation.AndroidScreens
 
@@ -18,6 +19,7 @@ class CiceroneModule {
     @Provides
     fun router(): Router = cicerone.router
 
+    @SuperScope
     @Provides
     fun screens(): IScreens = AndroidScreens()
 }

@@ -1,5 +1,6 @@
 package ru.alinadorozhkina.musicapp.mvp.model.cache.room
 
+import android.util.Log
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -24,6 +25,8 @@ class RoomTrackListCache(val db: DataBase): ITrackListCache {
     }.subscribeOn(Schedulers.io())
 
     override fun putArtistTrackList(artist: Artist, artistTrackList: ArtistTrackList) = Completable.fromAction{
+        val art = RoomArtist(artist.id, artist.name, artist.picture, artist.tracklist)
+        db.artistDao.insert(art)
         val roomArtist =
             artist.name.let { db.artistDao.findByName(it) }
         val roomArtistTrack = artistTrackList.data.map {
@@ -38,8 +41,10 @@ class RoomTrackListCache(val db: DataBase): ITrackListCache {
         db.artistTrackListDao.getArtistTracks().let {
             if (it.isEmpty()) {
                 db.artistTrackListDao.insert(roomArtistTrack)
+                Log.v("TAG insert", roomArtistTrack.toString())
             } else {
                 db.artistTrackListDao.update(roomArtistTrack)
+                Log.v("TAG update", roomArtistTrack.toString())
             }
         }
     }.subscribeOn(Schedulers.io())
@@ -48,7 +53,5 @@ class RoomTrackListCache(val db: DataBase): ITrackListCache {
         val art = RoomArtist(artist.id, artist.name, artist.picture, artist.tracklist)
         db.artistDao.insert(art)
     }.subscribeOn(Schedulers.io())
-
-
 
 }

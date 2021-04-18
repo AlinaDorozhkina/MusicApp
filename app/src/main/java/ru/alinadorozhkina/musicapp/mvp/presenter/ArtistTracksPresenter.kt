@@ -47,8 +47,9 @@ class ArtistTracksPresenter(
             Log.v("Presenter", artist.toString())
             trackListRepoRetrofit.getTrackList(it)
                 .observeOn(uiSchedular)
-                .subscribe({
-                    it.data.let { it1 -> trackListPresenter.tracks.addAll(it1)
+                .subscribe({ artistTrackList ->
+                    artistTrackList.data.let { list ->
+                         trackListPresenter.tracks.addAll(list)
                         viewState.updateList()}
                 }, {
                     Log.v("Presenter", "ошибка" + it.message)
