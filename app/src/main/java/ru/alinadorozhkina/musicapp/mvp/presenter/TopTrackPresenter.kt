@@ -12,13 +12,15 @@ import ru.alinadorozhkina.musicapp.mvp.model.view.TopTrackView
 import ru.alinadorozhkina.musicapp.mvp.model.view.list.ITopTracksItemView
 import ru.alinadorozhkina.musicapp.mvp.navigation.IScreens
 import ru.alinadorozhkina.musicapp.mvp.presenter.list.ITopTracksListPresenter
+import javax.inject.Inject
 
 class TopTrackPresenter(
-    val topTracksRepoRetrofit: ITopTracksRepo,
     val uiSchedular: Scheduler,
-    val router: Router,
-    val screens: IScreens
 ) : MvpPresenter<TopTrackView>() {
+
+    @Inject lateinit var topTracksRepoRetrofit: ITopTracksRepo
+    @Inject lateinit var screens: IScreens
+    @Inject lateinit var router: Router
 
     class TopTracksListPresenter : ITopTracksListPresenter {
         val tracks = mutableListOf<Track>()

@@ -10,12 +10,14 @@ import ru.alinadorozhkina.musicapp.mvp.model.repo.ITrackListRepo
 import ru.alinadorozhkina.musicapp.mvp.model.view.TrackLisView
 import ru.alinadorozhkina.musicapp.mvp.model.view.list.ITrackListItemView
 import ru.alinadorozhkina.musicapp.mvp.presenter.list.ITrackListItemPresenter
+import javax.inject.Inject
 
 class ArtistTracksPresenter(
-    val trackListRepoRetrofit: ITrackListRepo,
     val uiSchedular: Scheduler,
     val artist: Artist,
 ): MvpPresenter<TrackLisView>() {
+
+    @Inject lateinit var trackListRepoRetrofit: ITrackListRepo
 
     class ArtistTracksListPresenter: ITrackListItemPresenter{
         val tracks = mutableListOf<ArtistTrack>()
@@ -42,6 +44,7 @@ class ArtistTracksPresenter(
 
     private fun loadTracks() {
         val disposable = artist.let {
+            Log.v("Presenter", artist.toString())
             trackListRepoRetrofit.getTrackList(it)
                 .observeOn(uiSchedular)
                 .subscribe({

@@ -1,9 +1,8 @@
 package ru.alinadorozhkina.musicapp.ui.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,7 +11,6 @@ import kotlinx.android.synthetic.main.fragment_artist_tracks.*
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import ru.alinadorozhkina.musicapp.R
-import ru.alinadorozhkina.musicapp.api.ApiHolder
 import ru.alinadorozhkina.musicapp.databinding.FragmentArtistBinding
 import ru.alinadorozhkina.musicapp.databinding.FragmentArtistTracksBinding
 import ru.alinadorozhkina.musicapp.mvp.model.cache.room.RoomImageCache
@@ -43,14 +41,13 @@ class ArtistTracksFragment : MvpAppCompatFragment(), TrackLisView {
     private var ui: FragmentArtistTracksBinding? = null
     private val presenter by  moxyPresenter {
         val artist = arguments?.getParcelable<Artist>(ARTIST_VALUE) as Artist
+        Log.v("Artist tracks", artist.toString())
         ArtistTracksPresenter(
-        RetrofitTrackListRepo(ApiHolder.api,
-            AndroidNetworkStatus(App.instance),
-            RoomTrackListCache(
-            DataBase.getInstance())),
         AndroidSchedulers.mainThread(),
         artist
-    ) }
+    ).apply {
+        App.instance.appComponent.inject(this)
+        } }
     private var adapter: ArtistTracksRVAdapter? = null
 
     override fun onCreateView(

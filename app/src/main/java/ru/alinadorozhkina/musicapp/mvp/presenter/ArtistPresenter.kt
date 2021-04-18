@@ -9,14 +9,16 @@ import ru.alinadorozhkina.musicapp.mvp.model.cache.IImageCache
 import ru.alinadorozhkina.musicapp.mvp.model.entity.Artist
 import ru.alinadorozhkina.musicapp.mvp.model.view.ArtistView
 import ru.alinadorozhkina.musicapp.mvp.navigation.IScreens
+import javax.inject.Inject
 
 class ArtistPresenter(
     val artist: Artist,
-    val router: Router,
-    val screens: IScreens,
     val imageCache: IImageCache,
     val uiScheduler: Scheduler
 ) : MvpPresenter<ArtistView>() {
+
+    @Inject lateinit var screens: IScreens
+    @Inject lateinit var router: Router
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()

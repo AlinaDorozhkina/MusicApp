@@ -26,7 +26,7 @@ abstract class DataBase : RoomDatabase() {
     abstract val imageDao: ImageDao
 
     companion object {
-        private const val DB_NAME = "data_base3.db"
+        const val DB_NAME = "data_base3.db"
         private var instance: DataBase? = null
         fun create(context: Context) {
             if (instance == null) {

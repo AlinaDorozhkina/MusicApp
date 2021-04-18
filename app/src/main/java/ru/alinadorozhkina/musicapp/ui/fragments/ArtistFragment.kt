@@ -37,11 +37,11 @@ class ArtistFragment : MvpAppCompatFragment(), ArtistView {
     private val presenter by moxyPresenter {
         val artist = arguments?.getParcelable<Artist>(ARTIST_VALUE) as Artist
         ArtistPresenter( artist,
-            App.instance.router,
-            AndroidScreens(),
             RoomImageCache(DataBase.getInstance(), App.instance.cacheDir ),
             AndroidSchedulers.mainThread()
-        ) }
+        ).apply {
+            App.instance.appComponent.inject(this)
+        } }
 
 
     override fun onCreateView(
