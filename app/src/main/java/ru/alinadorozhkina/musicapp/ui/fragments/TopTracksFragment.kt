@@ -14,6 +14,7 @@ import ru.alinadorozhkina.musicapp.R
 import ru.alinadorozhkina.musicapp.api.ApiHolder
 import ru.alinadorozhkina.musicapp.databinding.FragmentTopTracksBinding
 import ru.alinadorozhkina.musicapp.mvp.model.cache.room.RoomImageCache
+import ru.alinadorozhkina.musicapp.mvp.model.cache.room.RoomTopTrackCache
 import ru.alinadorozhkina.musicapp.mvp.model.entity.room.db.DataBase
 import ru.alinadorozhkina.musicapp.mvp.model.repo.RetrofitTopTracksRepo
 import ru.alinadorozhkina.musicapp.mvp.model.view.TopTrackView
@@ -29,7 +30,13 @@ class TopTracksFragment : MvpAppCompatFragment(), TopTrackView {
 
     private val presenter by moxyPresenter {
         TopTrackPresenter(
-            RetrofitTopTracksRepo(ApiHolder.api, AndroidNetworkStatus(App.instance), DataBase.getInstance()),
+            RetrofitTopTracksRepo(
+                ApiHolder.api,
+                AndroidNetworkStatus(App.instance),
+                RoomTopTrackCache(
+                    DataBase.getInstance()
+                )
+            ),
             AndroidSchedulers.mainThread(),
             App.instance.router,
             AndroidScreens()
@@ -59,9 +66,18 @@ class TopTracksFragment : MvpAppCompatFragment(), TopTrackView {
 
     override fun init() {
         ui?.rvTracks?.layoutManager = LinearLayoutManager(requireContext())
-        ui?.rvTracks?.addItemDecoration((DividerItemDecoration(requireActivity(), LinearLayoutManager.VERTICAL)))
-        adapter = TopTracksRVAdapter(presenter.topTrackListPresenter, GlideImageLoader(
-            RoomImageCache(DataBase.getInstance(), App.instance.cacheDir), AndroidNetworkStatus(requireContext())))
+        ui?.rvTracks?.addItemDecoration(
+            (DividerItemDecoration(
+                requireActivity(),
+                LinearLayoutManager.VERTICAL
+            ))
+        )
+        adapter = TopTracksRVAdapter(
+            presenter.topTrackListPresenter, GlideImageLoader(
+                RoomImageCache(DataBase.getInstance(), App.instance.cacheDir),
+                AndroidNetworkStatus(requireContext())
+            )
+        )
         ui?.rvTracks?.adapter = adapter
     }
 

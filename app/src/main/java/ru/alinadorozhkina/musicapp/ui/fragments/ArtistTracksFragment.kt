@@ -16,6 +16,7 @@ import ru.alinadorozhkina.musicapp.api.ApiHolder
 import ru.alinadorozhkina.musicapp.databinding.FragmentArtistBinding
 import ru.alinadorozhkina.musicapp.databinding.FragmentArtistTracksBinding
 import ru.alinadorozhkina.musicapp.mvp.model.cache.room.RoomImageCache
+import ru.alinadorozhkina.musicapp.mvp.model.cache.room.RoomTrackListCache
 import ru.alinadorozhkina.musicapp.mvp.model.entity.Artist
 import ru.alinadorozhkina.musicapp.mvp.model.entity.room.db.DataBase
 import ru.alinadorozhkina.musicapp.mvp.model.repo.RetrofitTrackListRepo
@@ -43,7 +44,10 @@ class ArtistTracksFragment : MvpAppCompatFragment(), TrackLisView {
     private val presenter by  moxyPresenter {
         val artist = arguments?.getParcelable<Artist>(ARTIST_VALUE) as Artist
         ArtistTracksPresenter(
-        RetrofitTrackListRepo(ApiHolder.api, AndroidNetworkStatus(App.instance), DataBase.getInstance()),
+        RetrofitTrackListRepo(ApiHolder.api,
+            AndroidNetworkStatus(App.instance),
+            RoomTrackListCache(
+            DataBase.getInstance())),
         AndroidSchedulers.mainThread(),
         artist
     ) }

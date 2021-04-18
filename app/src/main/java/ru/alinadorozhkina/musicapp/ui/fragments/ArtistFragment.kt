@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_artist.*
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
@@ -35,7 +36,12 @@ class ArtistFragment : MvpAppCompatFragment(), ArtistView {
 
     private val presenter by moxyPresenter {
         val artist = arguments?.getParcelable<Artist>(ARTIST_VALUE) as Artist
-        ArtistPresenter( artist, App.instance.router, AndroidScreens(), RoomImageCache(DataBase.getInstance(), App.instance.cacheDir )) }
+        ArtistPresenter( artist,
+            App.instance.router,
+            AndroidScreens(),
+            RoomImageCache(DataBase.getInstance(), App.instance.cacheDir ),
+            AndroidSchedulers.mainThread()
+        ) }
 
 
     override fun onCreateView(
