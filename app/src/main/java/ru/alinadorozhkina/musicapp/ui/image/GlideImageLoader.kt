@@ -16,6 +16,7 @@ import java.io.ByteArrayOutputStream
 
 class GlideImageLoader(val cache: IImageCache, val networkStatus: INetworkStatus) :
     IImageLoader<ImageView> {
+
     override fun load(url: String, container: ImageView) {
         networkStatus.isOnlineSingle()
             .observeOn(AndroidSchedulers.mainThread())

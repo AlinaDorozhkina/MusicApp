@@ -5,6 +5,7 @@ import ru.alinadorozhkina.musicapp.mvp.model.entity.room.RoomCachedImage
 
 @Dao
 interface ImageDao {
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(image: RoomCachedImage)
 
@@ -19,4 +20,5 @@ interface ImageDao {
 
     @Query("SELECT * FROM RoomCachedImage WHERE url = :url LIMIT 1")
     fun findByUrl(url: String): RoomCachedImage?
+
 }

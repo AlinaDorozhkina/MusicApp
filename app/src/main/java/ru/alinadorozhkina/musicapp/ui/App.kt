@@ -7,7 +7,7 @@ import ru.alinadorozhkina.musicapp.di.module.AppModule
 
 import ru.alinadorozhkina.musicapp.mvp.model.entity.room.db.DataBase
 
-class App: Application() {
+class App : Application() {
 
     companion object {
         lateinit var instance: App
@@ -18,7 +18,7 @@ class App: Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
-       DataBase.create(this)
+        DataBase.create(this)
 
         appComponent = DaggerAppComponent.builder()
             .appModule(AppModule(this))

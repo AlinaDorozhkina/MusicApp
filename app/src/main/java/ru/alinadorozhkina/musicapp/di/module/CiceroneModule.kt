@@ -11,6 +11,7 @@ import ru.alinadorozhkina.musicapp.ui.navigation.AndroidScreens
 
 @Module
 class CiceroneModule {
+
     private val cicerone: Cicerone<Router> = Cicerone.create()
 
     @Provides
@@ -22,4 +23,5 @@ class CiceroneModule {
     @SuperScope
     @Provides
     fun screens(): IScreens = AndroidScreens()
+
 }

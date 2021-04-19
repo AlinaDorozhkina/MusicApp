@@ -26,6 +26,7 @@ import ru.alinadorozhkina.musicapp.ui.image.GlideImageLoader
 import ru.alinadorozhkina.musicapp.ui.network.AndroidNetworkStatus
 
 private const val ARTIST_VALUE = "artist value"
+
 class ArtistTracksFragment : MvpAppCompatFragment(), TrackLisView {
 
     companion object {
@@ -39,15 +40,13 @@ class ArtistTracksFragment : MvpAppCompatFragment(), TrackLisView {
     }
 
     private var ui: FragmentArtistTracksBinding? = null
-    private val presenter by  moxyPresenter {
+    private val presenter by moxyPresenter {
         val artist = arguments?.getParcelable<Artist>(ARTIST_VALUE) as Artist
         Log.v("Artist tracks", artist.toString())
-        ArtistTracksPresenter(
-        AndroidSchedulers.mainThread(),
-        artist
-    ).apply {
-        App.instance.appComponent.inject(this)
-        } }
+        ArtistTracksPresenter(artist).apply {
+            App.instance.appComponent.inject(this)
+        }
+    }
     private var adapter: ArtistTracksRVAdapter? = null
 
     override fun onCreateView(
@@ -60,13 +59,20 @@ class ArtistTracksFragment : MvpAppCompatFragment(), TrackLisView {
 
     override fun init() = with(ui) {
         rv_artist_tracks.layoutManager = LinearLayoutManager(requireContext())
-        rv_artist_tracks.addItemDecoration((DividerItemDecoration(requireActivity(), LinearLayoutManager.VERTICAL)))
-        adapter = ArtistTracksRVAdapter(presenter.trackListPresenter, GlideImageLoader(RoomImageCache(
-            DataBase.getInstance(), App.instance.cacheDir), AndroidNetworkStatus(requireContext())) )
-        rv_artist_tracks.adapter=adapter
+        rv_artist_tracks.addItemDecoration(
+            (DividerItemDecoration(
+                requireActivity(),
+                LinearLayoutManager.VERTICAL
+            ))
+        )
+        adapter = ArtistTracksRVAdapter(presenter.trackListPresenter).apply {
+            App.instance.appComponent.inject(this)
+        }
+        rv_artist_tracks.adapter = adapter
     }
 
     override fun updateList() {
         ui?.rvArtistTracks?.adapter?.notifyDataSetChanged()
     }
+
 }

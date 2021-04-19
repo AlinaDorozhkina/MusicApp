@@ -25,4 +25,5 @@ class CacheModule {
     @SuperScope
     @Provides
     fun trackListCache(db: DataBase): ITrackListCache = RoomTrackListCache(db)
+
 }

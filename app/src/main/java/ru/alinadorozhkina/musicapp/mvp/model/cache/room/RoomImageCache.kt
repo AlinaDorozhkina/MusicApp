@@ -1,6 +1,5 @@
 package ru.alinadorozhkina.musicapp.mvp.model.cache.room
 
-import androidx.room.Database
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Maybe
 import io.reactivex.rxjava3.core.Single
@@ -13,9 +12,12 @@ import java.io.FileOutputStream
 import java.io.IOException
 import java.security.MessageDigest
 
-class RoomImageCache(val db: DataBase, val dir: File): IImageCache {
+class RoomImageCache(val db: DataBase, val dir: File) : IImageCache {
+
     private fun String.md5() = hash("MD5")
-    private fun String.hash(algorithm: String) = MessageDigest.getInstance(algorithm).digest(toByteArray()).fold("", { str, it -> "%02x".format(it) })
+    private fun String.hash(algorithm: String) =
+        MessageDigest.getInstance(algorithm).digest(toByteArray())
+            .fold("", { str, it -> "%02x".format(it) })
 
     override fun getBytes(url: String) = Maybe.fromCallable {
         db.imageDao.findByUrl(url)?.let {
@@ -42,13 +44,12 @@ class RoomImageCache(val db: DataBase, val dir: File): IImageCache {
         emitter.onComplete()
     }.subscribeOn(Schedulers.io())
 
-    override fun contains(url: String) = Single.fromCallable { db.imageDao.findByUrl(url) != null }.subscribeOn(Schedulers.io())
+    override fun contains(url: String) =
+        Single.fromCallable { db.imageDao.findByUrl(url) != null }.subscribeOn(Schedulers.io())
 
     override fun clear() = Completable.fromAction {
         db.imageDao.clear()
         dir.deleteRecursively()
     }.subscribeOn(Schedulers.io())
-
-
 
 }

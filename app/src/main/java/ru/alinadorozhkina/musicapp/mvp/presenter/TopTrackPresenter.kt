@@ -13,11 +13,11 @@ import ru.alinadorozhkina.musicapp.mvp.model.view.list.ITopTracksItemView
 import ru.alinadorozhkina.musicapp.mvp.navigation.IScreens
 import ru.alinadorozhkina.musicapp.mvp.presenter.list.ITopTracksListPresenter
 import javax.inject.Inject
+import javax.inject.Named
 
-class TopTrackPresenter(
-    val uiSchedular: Scheduler,
-) : MvpPresenter<TopTrackView>() {
+class TopTrackPresenter: MvpPresenter<TopTrackView>() {
 
+    @field:Named("ui-thread") @Inject lateinit var uiScheduler: Scheduler
     @Inject lateinit var topTracksRepoRetrofit: ITopTracksRepo
     @Inject lateinit var screens: IScreens
     @Inject lateinit var router: Router
@@ -54,7 +54,7 @@ class TopTrackPresenter(
 
     private fun loadTracks() {
         val disposable = topTracksRepoRetrofit.getTopTracks()
-            .observeOn(uiSchedular)
+            .observeOn(uiScheduler)
             .subscribe({
                 it.data?.let { it1 ->
                     topTrackListPresenter.tracks.addAll(it1)
@@ -72,4 +72,5 @@ class TopTrackPresenter(
         compositeDisposable.dispose()
         super.onDestroy()
     }
+
 }

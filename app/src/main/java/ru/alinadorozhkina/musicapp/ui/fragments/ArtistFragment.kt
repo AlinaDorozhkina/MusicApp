@@ -4,18 +4,14 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_artist.*
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import ru.alinadorozhkina.musicapp.databinding.FragmentArtistBinding
-import ru.alinadorozhkina.musicapp.mvp.model.cache.room.RoomImageCache
 import ru.alinadorozhkina.musicapp.mvp.model.entity.Artist
-import ru.alinadorozhkina.musicapp.mvp.model.entity.room.db.DataBase
 import ru.alinadorozhkina.musicapp.mvp.model.view.ArtistView
 import ru.alinadorozhkina.musicapp.mvp.presenter.ArtistPresenter
 import ru.alinadorozhkina.musicapp.ui.App
-import ru.alinadorozhkina.musicapp.ui.navigation.AndroidScreens
 
 private const val ARTIST_VALUE = "artist value"
 
@@ -33,16 +29,12 @@ class ArtistFragment : MvpAppCompatFragment(), ArtistView {
 
     private var ui: FragmentArtistBinding? = null
 
-
     private val presenter by moxyPresenter {
         val artist = arguments?.getParcelable<Artist>(ARTIST_VALUE) as Artist
-        ArtistPresenter( artist,
-            RoomImageCache(DataBase.getInstance(), App.instance.cacheDir ),
-            AndroidSchedulers.mainThread()
-        ).apply {
+        ArtistPresenter(artist).apply {
             App.instance.appComponent.inject(this)
-        } }
-
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,7 +42,8 @@ class ArtistFragment : MvpAppCompatFragment(), ArtistView {
         savedInstanceState: Bundle?
     ) = FragmentArtistBinding.inflate(inflater, container, false).also {
         ui = it
-        ui?.btnShowTrackList?.setOnClickListener { presenter.buttonTrackListClicked()
+        ui?.btnShowTrackList?.setOnClickListener {
+            presenter.buttonTrackListClicked()
         }
     }.root
 
@@ -59,11 +52,12 @@ class ArtistFragment : MvpAppCompatFragment(), ArtistView {
         ui = null
     }
 
-    override fun setArtistName(name: String) = with(ui){
+    override fun setArtistName(name: String) = with(ui) {
         tv_artist_name?.text = name
     }
 
     override fun setArtistPicture(bitmap: Bitmap) {
         ui?.artistPicture?.setImageBitmap(bitmap)
     }
+
 }

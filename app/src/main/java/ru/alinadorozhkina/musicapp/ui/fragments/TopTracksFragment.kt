@@ -24,9 +24,7 @@ import ru.alinadorozhkina.musicapp.ui.network.AndroidNetworkStatus
 class TopTracksFragment : MvpAppCompatFragment(), TopTrackView {
 
     private val presenter by moxyPresenter {
-        TopTrackPresenter(
-            AndroidSchedulers.mainThread(),
-        ).apply {
+        TopTrackPresenter().apply {
             App.instance.appComponent.inject(this)
         }
     }
@@ -60,12 +58,9 @@ class TopTracksFragment : MvpAppCompatFragment(), TopTrackView {
                 LinearLayoutManager.VERTICAL
             ))
         )
-        adapter = TopTracksRVAdapter(
-            presenter.topTrackListPresenter, GlideImageLoader(
-                RoomImageCache(DataBase.getInstance(), App.instance.cacheDir),
-                AndroidNetworkStatus(requireContext())
-            )
-        )
+        adapter = TopTracksRVAdapter(presenter.topTrackListPresenter).apply {
+            App.instance.appComponent.inject(this)
+        }
         ui?.rvTracks?.adapter = adapter
     }
 
@@ -77,4 +72,5 @@ class TopTracksFragment : MvpAppCompatFragment(), TopTrackView {
         super.onDestroyView()
         ui = null
     }
+
 }

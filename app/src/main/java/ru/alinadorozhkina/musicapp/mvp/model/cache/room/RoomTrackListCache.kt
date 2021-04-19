@@ -13,6 +13,7 @@ import ru.alinadorozhkina.musicapp.mvp.model.entity.room.RoomArtistTrack
 import ru.alinadorozhkina.musicapp.mvp.model.entity.room.db.DataBase
 
 class RoomTrackListCache(val db: DataBase): ITrackListCache {
+
     override fun getArtistTrackList(artist: Artist) = Single.fromCallable {
         val roomArtistTrack = artist.name.let {
             db.artistDao.findByName(it)

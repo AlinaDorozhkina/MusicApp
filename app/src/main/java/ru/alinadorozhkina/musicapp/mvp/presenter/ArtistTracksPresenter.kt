@@ -11,12 +11,11 @@ import ru.alinadorozhkina.musicapp.mvp.model.view.TrackLisView
 import ru.alinadorozhkina.musicapp.mvp.model.view.list.ITrackListItemView
 import ru.alinadorozhkina.musicapp.mvp.presenter.list.ITrackListItemPresenter
 import javax.inject.Inject
+import javax.inject.Named
 
-class ArtistTracksPresenter(
-    val uiSchedular: Scheduler,
-    val artist: Artist,
-): MvpPresenter<TrackLisView>() {
+class ArtistTracksPresenter(val artist: Artist): MvpPresenter<TrackLisView>() {
 
+    @field:Named("ui-thread")@Inject lateinit var uiSchedular: Scheduler
     @Inject lateinit var trackListRepoRetrofit: ITrackListRepo
 
     class ArtistTracksListPresenter: ITrackListItemPresenter{
@@ -63,4 +62,5 @@ class ArtistTracksPresenter(
         compositeDisposable.dispose()
         super.onDestroy()
     }
+
 }

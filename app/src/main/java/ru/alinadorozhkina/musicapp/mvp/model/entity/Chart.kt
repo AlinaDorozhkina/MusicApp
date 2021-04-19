@@ -5,7 +5,7 @@ import com.google.gson.annotations.Expose
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Chart (
+data class Chart(
     @Expose val data: List<Track>,
     @Expose val total: Int
-        ): Parcelable
+) : Parcelable

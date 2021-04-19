@@ -6,7 +6,7 @@ import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
 @StateStrategyType(AddToEndSingleStrategy::class)
-interface ArtistView: MvpView {
+interface ArtistView : MvpView {
     fun setArtistName(name: String)
     fun setArtistPicture(bitmap: Bitmap)
 }

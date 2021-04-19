@@ -12,12 +12,12 @@ class RetrofitTrackListRepo(
     val networkStatus: INetworkStatus,
     val cache: ITrackListCache
 ) : ITrackListRepo {
+
     override fun getTrackList(artist: Artist) = networkStatus.isOnlineSingle().flatMap { isOnline ->
         if (isOnline) {
             artist.tracklist.let { url ->
                 api.getTrackList(url)
                     .flatMap { artistTrackList ->
-                        //cache.putArtist(artist)
                         cache.putArtistTrackList(artist, artistTrackList)
                             .toSingleDefault(artistTrackList)
                     }

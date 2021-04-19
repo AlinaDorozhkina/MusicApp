@@ -8,12 +8,13 @@ import ru.alinadorozhkina.musicapp.databinding.ItemViewBinding
 import ru.alinadorozhkina.musicapp.mvp.model.image.IImageLoader
 import ru.alinadorozhkina.musicapp.mvp.model.view.list.ITopTracksItemView
 import ru.alinadorozhkina.musicapp.mvp.presenter.list.ITopTracksListPresenter
+import javax.inject.Inject
 
-class TopTracksRVAdapter(
-    val presenter: ITopTracksListPresenter,
-    val imageLoader: IImageLoader<ImageView>
-) :
+class TopTracksRVAdapter(val presenter: ITopTracksListPresenter) :
     RecyclerView.Adapter<TopTracksRVAdapter.ViewHolder>() {
+
+    @Inject
+    lateinit var imageLoader: IImageLoader<ImageView>
 
     inner class ViewHolder(val vb: ItemViewBinding) : RecyclerView.ViewHolder(vb.root),
         ITopTracksItemView {
@@ -21,16 +22,16 @@ class TopTracksRVAdapter(
             tvTitle.text = title
         }
 
-        override fun setPosition(position: Int) = with(vb){
+        override fun setPosition(position: Int) = with(vb) {
             tvPosition.text = position.toString()
         }
 
-        override fun setArtist(artist: String) = with(vb){
+        override fun setArtist(artist: String) = with(vb) {
             tvArtist.text = artist
         }
 
-        override fun loadPoster(url: String) = with(vb){
-            imageLoader.load(url, ivPoster )
+        override fun loadPoster(url: String) = with(vb) {
+            imageLoader.load(url, ivPoster)
         }
 
         override var pos = -1
@@ -54,4 +55,5 @@ class TopTracksRVAdapter(
         })
 
     override fun getItemCount(): Int = presenter.getCount()
+
 }

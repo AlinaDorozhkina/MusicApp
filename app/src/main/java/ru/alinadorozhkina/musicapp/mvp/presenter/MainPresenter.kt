@@ -6,7 +6,7 @@ import ru.alinadorozhkina.musicapp.mvp.model.view.MainView
 import ru.alinadorozhkina.musicapp.mvp.navigation.IScreens
 import javax.inject.Inject
 
-class MainPresenter() : MvpPresenter<MainView>() {
+class MainPresenter: MvpPresenter<MainView>() {
 
     @Inject lateinit var router: Router
     @Inject lateinit var screens: IScreens
@@ -15,4 +15,5 @@ class MainPresenter() : MvpPresenter<MainView>() {
         super.onFirstViewAttach()
         router.replaceScreen(screens.topList())
     }
+
 }
