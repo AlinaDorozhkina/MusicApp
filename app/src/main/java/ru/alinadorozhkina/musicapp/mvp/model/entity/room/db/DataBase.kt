@@ -16,7 +16,7 @@ import ru.alinadorozhkina.musicapp.mvp.model.entity.room.dao.ImageDao
         RoomArtist::class,
         RoomCachedImage::class
     ],
-    version = 3,
+    version = 4,
     exportSchema = true
 )
 abstract class DataBase : RoomDatabase() {
@@ -26,12 +26,11 @@ abstract class DataBase : RoomDatabase() {
     abstract val imageDao: ImageDao
 
     companion object {
-        const val DB_NAME = "data_base3.db"
+        const val DB_NAME = "data_base4.db"
         private var instance: DataBase? = null
         fun create(context: Context) {
             if (instance == null) {
                 instance = Room.databaseBuilder(context, DataBase::class.java, DB_NAME)
-                    .addMigrations(MIGRATION_1_2)
                     .build()
             }
         }

@@ -1,10 +1,13 @@
 package ru.alinadorozhkina.musicapp.mvp.presenter
 
+import android.media.MediaPlayer
+import android.net.Uri
 import android.util.Log
 import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import moxy.MvpPresenter
+import ru.alinadorozhkina.musicapp.mvp.model.audio.IAudioPlayer
 import ru.alinadorozhkina.musicapp.mvp.model.entity.Artist
 import ru.alinadorozhkina.musicapp.mvp.model.entity.Track
 import ru.alinadorozhkina.musicapp.mvp.model.repo.ITopTracksRepo
@@ -21,8 +24,10 @@ class TopTrackPresenter: MvpPresenter<TopTrackView>() {
     @Inject lateinit var topTracksRepoRetrofit: ITopTracksRepo
     @Inject lateinit var screens: IScreens
     @Inject lateinit var router: Router
+    @Inject lateinit var audioPlayer: IAudioPlayer
 
-    class TopTracksListPresenter : ITopTracksListPresenter {
+
+    inner class TopTracksListPresenter :  ITopTracksListPresenter {
         val tracks = mutableListOf<Track>()
         override var itemClickListener: ((ITopTracksItemView) -> Unit)? = null
 
@@ -35,6 +40,11 @@ class TopTrackPresenter: MvpPresenter<TopTrackView>() {
         }
 
         override fun getCount(): Int = tracks.size
+        override fun playClicked(position: Int) {
+            val song = tracks[position].preview
+            audioPlayer.start(song)
+        }
+
     }
 
     val topTrackListPresenter = TopTracksListPresenter()
@@ -70,7 +80,10 @@ class TopTrackPresenter: MvpPresenter<TopTrackView>() {
 
     override fun onDestroy() {
         compositeDisposable.dispose()
+        audioPlayer.clear()
         super.onDestroy()
     }
+
+
 
 }

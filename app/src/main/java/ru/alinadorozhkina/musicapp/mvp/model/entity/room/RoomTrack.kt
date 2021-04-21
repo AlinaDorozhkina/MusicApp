@@ -11,5 +11,6 @@ class RoomTrack(
     val title: String,
     val position: Int,
     @Embedded
-    val artist: Artist
+    val artist: Artist,
+    val preview: String
 )

@@ -19,7 +19,8 @@ import ru.alinadorozhkina.musicapp.ui.adapters.TopTracksRVAdapter
         ArtistTrackListModule::class,
         ApiModule::class,
         CacheModule::class,
-        ImageModule::class
+        ImageModule::class,
+        AudioModule::class
     ]
 )
 
@@ -32,5 +33,6 @@ interface AppComponent {
     fun inject(artistTracksPresenter: ArtistTracksPresenter)
     fun inject(topTrackRVAdapter: TopTracksRVAdapter)
     fun inject(artistTracksRVAdapter: ArtistTracksRVAdapter)
+    fun inject(topTracksListPresenter: TopTrackPresenter.TopTracksListPresenter)
 
 }

@@ -5,4 +5,5 @@ interface IListPresenter<V> {
 
     fun bindView(view: V)
     fun getCount(): Int
+   fun playClicked(position: Int)
 }

@@ -9,5 +9,7 @@ data class Track(
     @Expose val id: Int,
     @Expose val title: String,
     @Expose val position: Int,
-    @Expose val artist: Artist
+    @Expose val artist: Artist,
+    @Expose val preview: String
 ) : Parcelable
+

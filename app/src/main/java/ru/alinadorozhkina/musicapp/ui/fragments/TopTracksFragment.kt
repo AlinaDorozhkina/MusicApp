@@ -58,7 +58,9 @@ class TopTracksFragment : MvpAppCompatFragment(), TopTrackView {
                 LinearLayoutManager.VERTICAL
             ))
         )
-        adapter = TopTracksRVAdapter(presenter.topTrackListPresenter).apply {
+        adapter = TopTracksRVAdapter(presenter.topTrackListPresenter.apply {
+            App.instance.appComponent.inject(this)
+        }).apply {
             App.instance.appComponent.inject(this)
         }
         ui?.rvTracks?.adapter = adapter
@@ -67,6 +69,8 @@ class TopTracksFragment : MvpAppCompatFragment(), TopTrackView {
     override fun updateList() {
         ui?.rvTracks?.adapter?.notifyDataSetChanged()
     }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()
