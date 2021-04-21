@@ -18,16 +18,24 @@ import ru.alinadorozhkina.musicapp.mvp.presenter.list.ITopTracksListPresenter
 import javax.inject.Inject
 import javax.inject.Named
 
-class TopTrackPresenter: MvpPresenter<TopTrackView>() {
+class TopTrackPresenter : MvpPresenter<TopTrackView>() {
 
-    @field:Named("ui-thread") @Inject lateinit var uiScheduler: Scheduler
-    @Inject lateinit var topTracksRepoRetrofit: ITopTracksRepo
-    @Inject lateinit var screens: IScreens
-    @Inject lateinit var router: Router
-    @Inject lateinit var audioPlayer: IAudioPlayer
+    @field:Named("ui-thread")
+    @Inject
+    lateinit var uiScheduler: Scheduler
+    @Inject
+    lateinit var topTracksRepoRetrofit: ITopTracksRepo
+    @Inject
+    lateinit var screens: IScreens
+    @Inject
+    lateinit var router: Router
+    @Inject
+    lateinit var audioPlayer: IAudioPlayer
+
+    val compositeDisposable = CompositeDisposable()
 
 
-    inner class TopTracksListPresenter :  ITopTracksListPresenter {
+    inner class TopTracksListPresenter : ITopTracksListPresenter {
         val tracks = mutableListOf<Track>()
         override var itemClickListener: ((ITopTracksItemView) -> Unit)? = null
 
@@ -42,13 +50,18 @@ class TopTrackPresenter: MvpPresenter<TopTrackView>() {
         override fun getCount(): Int = tracks.size
         override fun playClicked(position: Int) {
             val song = tracks[position].preview
-            audioPlayer.start(song)
+            val disposable = audioPlayer.start(song)
+                .observeOn(uiScheduler)
+                .subscribe(
+
+                )
+            compositeDisposable.add(disposable)
+
         }
 
     }
 
     val topTrackListPresenter = TopTracksListPresenter()
-    val compositeDisposable = CompositeDisposable()
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -83,7 +96,6 @@ class TopTrackPresenter: MvpPresenter<TopTrackView>() {
         audioPlayer.clear()
         super.onDestroy()
     }
-
 
 
 }
