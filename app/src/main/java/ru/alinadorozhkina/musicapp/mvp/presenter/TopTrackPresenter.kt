@@ -2,6 +2,7 @@ package ru.alinadorozhkina.musicapp.mvp.presenter
 
 import android.media.MediaPlayer
 import android.net.Uri
+import android.os.CountDownTimer
 import android.util.Log
 import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.core.Scheduler
@@ -41,6 +42,7 @@ class TopTrackPresenter : MvpPresenter<TopTrackView>() {
 
         override fun bindView(view: ITopTracksItemView) {
             val track = tracks[view.pos]
+            view.init()
             track.title.let { view.setTitle(it) }
             track.artist.let { it.name.let { name -> view.setArtist(name) } }
             track.position.let { view.setPosition(it) }
@@ -48,16 +50,37 @@ class TopTrackPresenter : MvpPresenter<TopTrackView>() {
         }
 
         override fun getCount(): Int = tracks.size
-        override fun playClicked(position: Int) {
-            val song = tracks[position].preview
-            val disposable = audioPlayer.start(song)
-                .observeOn(uiScheduler)
-                .subscribe(
+        override fun playClicked(position: Int, view: ITopTracksItemView) {
+                val song = tracks[position].preview
+                val disposable = audioPlayer.create(song)
+                    .observeOn(uiScheduler)
+                    .subscribe ({ duration ->
+                        Log.v("progress", duration.toString())
+                        if (duration !== null) {
+                            view.seekbarMax(duration)
+                            val timer = object : CountDownTimer(duration.toLong(), 1000) {
+                                override fun onTick(millisUntilFinished: Long) {
+                                   view.seekbarProgress(millisUntilFinished.div(1000).toInt())
+                                }
+                                override fun onFinish() {
+                                    view.seekbarProgress(0)
+                                }
+                            }
+                            timer.start()
 
-                )
-            compositeDisposable.add(disposable)
-
+                        }
+                    }, {
+                        Log.v("error", it.toString())
+                    })
+                compositeDisposable.add(disposable)
         }
+
+        override fun stopClicked() {
+            audioPlayer.stop()
+        }
+
+
+
 
     }
 

@@ -1,21 +1,15 @@
 package ru.alinadorozhkina.musicapp.ui.adapters
 
-import android.graphics.Color
-import android.media.MediaPlayer
-import android.net.Uri
+import android.os.CountDownTimer
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import ru.alinadorozhkina.musicapp.R
 import ru.alinadorozhkina.musicapp.databinding.ItemViewBinding
-import ru.alinadorozhkina.musicapp.mvp.model.entity.Track
 import ru.alinadorozhkina.musicapp.mvp.model.image.IImageLoader
 import ru.alinadorozhkina.musicapp.mvp.model.view.list.ITopTracksItemView
 import ru.alinadorozhkina.musicapp.mvp.presenter.list.ITopTracksListPresenter
-import ru.alinadorozhkina.musicapp.ui.App
 import javax.inject.Inject
 
 class TopTracksRVAdapter(val presenter: ITopTracksListPresenter) :
@@ -41,9 +35,9 @@ class TopTracksRVAdapter(val presenter: ITopTracksListPresenter) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) =
         presenter.bindView(holder.apply {
             pos = position
-            this.vb.buttonPlay.setOnClickListener {
-                    presenter.playClicked(pos)
-            }
+//            this.vb.buttonPlay.setOnClickListener {
+//                presenter.playClicked(pos, this)
+//            }
         })
 
 
@@ -51,6 +45,14 @@ class TopTracksRVAdapter(val presenter: ITopTracksListPresenter) :
 
     inner class ViewHolder(val vb: ItemViewBinding) : RecyclerView.ViewHolder(vb.root),
         ITopTracksItemView {
+        override fun init() = with(vb) {
+            buttonPlay.setOnClickListener {
+                presenter.playClicked(pos, this@ViewHolder)
+            }
+            buttonStop.setOnClickListener {
+                presenter.stopClicked()
+            }
+        }
 
         override fun setTitle(title: String) = with(vb) {
             tvTitle.text = title
@@ -68,11 +70,24 @@ class TopTracksRVAdapter(val presenter: ITopTracksListPresenter) :
             imageLoader.load(url, ivPoster)
         }
 
-//        override fun play(uri: Uri) {
-//            player = MediaPlayer.create(App.instance, uri)
-//            player.start()
-//        }
+        override fun seekbarMax(duration: Int) = with(vb) {
+            seekbar.max = duration / 1000
+//            val timer = object: CountDownTimer(duration.div(duration).toLong(), 0) {
+//                override fun onTick(millisUntilFinished: Long) {
+//                    seekbar.progress = millisUntilFinished.toInt()
+//                }
+//
+//                override fun onFinish() {
+//                    seekbar.progress = 0
+//                }
+//            }
+//            timer.start()
+        }
 
+        override fun seekbarProgress(progress: Int) {
+            Log.v("progress", " seekbarprogress $progress")
+            vb.seekbar.progress = progress
+        }
 
         override var pos = -1
 

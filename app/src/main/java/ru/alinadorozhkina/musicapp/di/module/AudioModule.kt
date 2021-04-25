@@ -1,6 +1,5 @@
 package ru.alinadorozhkina.musicapp.di.module
 
-import android.media.MediaPlayer
 import dagger.Module
 import dagger.Provides
 import ru.alinadorozhkina.musicapp.di.SuperScope
@@ -13,7 +12,4 @@ class AudioModule {
     @SuperScope
     @Provides
     fun audio(app: App): IAudioPlayer = AndroidMediaPlayer(app)
-    @SuperScope
-    @Provides
-    fun player(): MediaPlayer = MediaPlayer()
 }

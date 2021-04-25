@@ -30,9 +30,6 @@ class ArtistTracksPresenter(val artist: Artist): MvpPresenter<TrackLisView>() {
         }
 
         override fun getCount(): Int = tracks.size
-        override fun playClicked(position: Int) {
-            TODO("Not yet implemented")
-        }
 
     }
 
