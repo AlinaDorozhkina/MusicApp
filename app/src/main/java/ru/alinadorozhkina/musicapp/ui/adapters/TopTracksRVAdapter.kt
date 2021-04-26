@@ -1,6 +1,5 @@
 package ru.alinadorozhkina.musicapp.ui.adapters
 
-import android.os.CountDownTimer
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -35,9 +34,6 @@ class TopTracksRVAdapter(val presenter: ITopTracksListPresenter) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) =
         presenter.bindView(holder.apply {
             pos = position
-//            this.vb.buttonPlay.setOnClickListener {
-//                presenter.playClicked(pos, this)
-//            }
         })
 
 
@@ -52,6 +48,8 @@ class TopTracksRVAdapter(val presenter: ITopTracksListPresenter) :
             buttonStop.setOnClickListener {
                 presenter.stopClicked()
             }
+
+           seekbar.isEnabled=false
         }
 
         override fun setTitle(title: String) = with(vb) {
@@ -71,17 +69,7 @@ class TopTracksRVAdapter(val presenter: ITopTracksListPresenter) :
         }
 
         override fun seekbarMax(duration: Int) = with(vb) {
-            seekbar.max = duration / 1000
-//            val timer = object: CountDownTimer(duration.div(duration).toLong(), 0) {
-//                override fun onTick(millisUntilFinished: Long) {
-//                    seekbar.progress = millisUntilFinished.toInt()
-//                }
-//
-//                override fun onFinish() {
-//                    seekbar.progress = 0
-//                }
-//            }
-//            timer.start()
+            seekbar.max = duration
         }
 
         override fun seekbarProgress(progress: Int) {

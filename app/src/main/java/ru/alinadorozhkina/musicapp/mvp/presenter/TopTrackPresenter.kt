@@ -1,8 +1,5 @@
 package ru.alinadorozhkina.musicapp.mvp.presenter
 
-import android.media.MediaPlayer
-import android.net.Uri
-import android.os.CountDownTimer
 import android.util.Log
 import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.core.Scheduler
@@ -22,19 +19,17 @@ import javax.inject.Named
 class TopTrackPresenter : MvpPresenter<TopTrackView>() {
 
     @field:Named("ui-thread")
-    @Inject
-    lateinit var uiScheduler: Scheduler
-    @Inject
-    lateinit var topTracksRepoRetrofit: ITopTracksRepo
-    @Inject
-    lateinit var screens: IScreens
-    @Inject
-    lateinit var router: Router
-    @Inject
-    lateinit var audioPlayer: IAudioPlayer
+    @Inject lateinit var uiScheduler: Scheduler
+
+    @Inject lateinit var topTracksRepoRetrofit: ITopTracksRepo
+
+    @Inject lateinit var screens: IScreens
+
+    @Inject lateinit var router: Router
+
+    @Inject lateinit var audioPlayer: IAudioPlayer<Int>
 
     val compositeDisposable = CompositeDisposable()
-
 
     inner class TopTracksListPresenter : ITopTracksListPresenter {
         val tracks = mutableListOf<Track>()
@@ -51,28 +46,35 @@ class TopTrackPresenter : MvpPresenter<TopTrackView>() {
 
         override fun getCount(): Int = tracks.size
         override fun playClicked(position: Int, view: ITopTracksItemView) {
-                val song = tracks[position].preview
-                val disposable = audioPlayer.create(song)
-                    .observeOn(uiScheduler)
-                    .subscribe ({ duration ->
-                        view.seekbarProgress(duration)
-                        if (duration !== null) {
+            val song = tracks[position].preview
 
-                            Log.v("progress", duration.toString())
-
-                        }
-                    }, {
-                        Log.v("error", it.toString())
-                    })
-                compositeDisposable.add(disposable)
+            val disposable = audioPlayer.create(song)
+                .observeOn(uiScheduler)
+                .subscribe({
+                    audioPlayer.getDuration()
+                        .subscribe({ duration ->
+                            Log.v("Duration", duration.toString())
+                            view.seekbarMax(duration)
+                            audioPlayer.start().subscribe({ currentPosition ->
+                                Log.v("progress", currentPosition.toString())
+                                view.seekbarProgress(currentPosition)
+                            }, { error ->
+                                Log.v("Error", error.toString())
+                                // показать через холдер тост об ошибке
+                            }, {
+                                view.seekbarProgress(0)
+                            })
+                        }, {
+                            view.seekbarMax(0)
+                        })
+                }, {
+                })
+            compositeDisposable.add(disposable)
         }
 
         override fun stopClicked() {
             audioPlayer.stop()
         }
-
-
-
 
     }
 
@@ -85,7 +87,6 @@ class TopTrackPresenter : MvpPresenter<TopTrackView>() {
 
         topTrackListPresenter.itemClickListener = { itemView ->
             val artist: Artist = topTrackListPresenter.tracks[itemView.pos].artist
-            Log.v("TAG", artist.toString())
             router.navigateTo(screens.artist(artist))
         }
     }
@@ -94,13 +95,13 @@ class TopTrackPresenter : MvpPresenter<TopTrackView>() {
         val disposable = topTracksRepoRetrofit.getTopTracks()
             .observeOn(uiScheduler)
             .subscribe({
-                it.data?.let { it1 ->
+                it.data.let { it1 ->
                     topTrackListPresenter.tracks.addAll(it1)
                     viewState.setTopTrackAmount(it.total)
                     viewState.updateList()
                 }
             }, {
-                Log.v("Presenter", "ошибка" + it.message)
+                Log.v("Presenter loadTracks", "ошибка" + it.message)
                 print(it.message)
             })
         compositeDisposable.add(disposable)
@@ -111,6 +112,5 @@ class TopTrackPresenter : MvpPresenter<TopTrackView>() {
         audioPlayer.clear()
         super.onDestroy()
     }
-
 
 }

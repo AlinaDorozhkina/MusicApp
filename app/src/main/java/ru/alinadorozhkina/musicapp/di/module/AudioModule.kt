@@ -11,5 +11,5 @@ import ru.alinadorozhkina.musicapp.ui.audio.AndroidMediaPlayer
 class AudioModule {
     @SuperScope
     @Provides
-    fun audio(app: App): IAudioPlayer = AndroidMediaPlayer(app)
+    fun audio(app: App): IAudioPlayer<Int> = AndroidMediaPlayer(app)
 }
