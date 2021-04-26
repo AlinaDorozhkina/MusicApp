@@ -1,9 +1,8 @@
 package ru.alinadorozhkina.musicapp.ui.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,9 +11,10 @@ import kotlinx.android.synthetic.main.fragment_artist_tracks.*
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import ru.alinadorozhkina.musicapp.R
-import ru.alinadorozhkina.musicapp.api.ApiHolder
 import ru.alinadorozhkina.musicapp.databinding.FragmentArtistBinding
 import ru.alinadorozhkina.musicapp.databinding.FragmentArtistTracksBinding
+import ru.alinadorozhkina.musicapp.mvp.model.cache.room.RoomImageCache
+import ru.alinadorozhkina.musicapp.mvp.model.cache.room.RoomTrackListCache
 import ru.alinadorozhkina.musicapp.mvp.model.entity.Artist
 import ru.alinadorozhkina.musicapp.mvp.model.entity.room.db.DataBase
 import ru.alinadorozhkina.musicapp.mvp.model.repo.RetrofitTrackListRepo
@@ -26,6 +26,7 @@ import ru.alinadorozhkina.musicapp.ui.image.GlideImageLoader
 import ru.alinadorozhkina.musicapp.ui.network.AndroidNetworkStatus
 
 private const val ARTIST_VALUE = "artist value"
+
 class ArtistTracksFragment : MvpAppCompatFragment(), TrackLisView {
 
     companion object {
@@ -39,13 +40,13 @@ class ArtistTracksFragment : MvpAppCompatFragment(), TrackLisView {
     }
 
     private var ui: FragmentArtistTracksBinding? = null
-    private val presenter by  moxyPresenter {
+    private val presenter by moxyPresenter {
         val artist = arguments?.getParcelable<Artist>(ARTIST_VALUE) as Artist
-        ArtistTracksPresenter(
-        RetrofitTrackListRepo(ApiHolder.api, AndroidNetworkStatus(App.instance), DataBase.getInstance()),
-        AndroidSchedulers.mainThread(),
-        artist
-    ) }
+        Log.v("Artist tracks", artist.toString())
+        ArtistTracksPresenter(artist).apply {
+            App.instance.appComponent.inject(this)
+        }
+    }
     private var adapter: ArtistTracksRVAdapter? = null
 
     override fun onCreateView(
@@ -58,12 +59,20 @@ class ArtistTracksFragment : MvpAppCompatFragment(), TrackLisView {
 
     override fun init() = with(ui) {
         rv_artist_tracks.layoutManager = LinearLayoutManager(requireContext())
-        rv_artist_tracks.addItemDecoration((DividerItemDecoration(requireActivity(), LinearLayoutManager.VERTICAL)))
-        adapter = ArtistTracksRVAdapter(presenter.trackListPresenter, GlideImageLoader() )
-        rv_artist_tracks.adapter=adapter
+        rv_artist_tracks.addItemDecoration(
+            (DividerItemDecoration(
+                requireActivity(),
+                LinearLayoutManager.VERTICAL
+            ))
+        )
+        adapter = ArtistTracksRVAdapter(presenter.trackListPresenter).apply {
+            App.instance.appComponent.inject(this)
+        }
+        rv_artist_tracks.adapter = adapter
     }
 
     override fun updateList() {
         ui?.rvArtistTracks?.adapter?.notifyDataSetChanged()
     }
+
 }

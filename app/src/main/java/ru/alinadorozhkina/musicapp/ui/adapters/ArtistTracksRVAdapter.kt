@@ -9,23 +9,25 @@ import ru.alinadorozhkina.musicapp.databinding.TrackItemViewBinding
 import ru.alinadorozhkina.musicapp.mvp.model.image.IImageLoader
 import ru.alinadorozhkina.musicapp.mvp.model.view.list.ITrackListItemView
 import ru.alinadorozhkina.musicapp.mvp.presenter.list.ITrackListItemPresenter
+import javax.inject.Inject
 
-class ArtistTracksRVAdapter(
-    val presenter: ITrackListItemPresenter,
-    val imageLoader: IImageLoader<ImageView>
-): RecyclerView.Adapter<ArtistTracksRVAdapter.ViewHolder>() {
+class ArtistTracksRVAdapter(val presenter: ITrackListItemPresenter) :
+    RecyclerView.Adapter<ArtistTracksRVAdapter.ViewHolder>() {
 
-    inner class ViewHolder(val vb: TrackItemViewBinding): RecyclerView.ViewHolder(vb.root),
-        ITrackListItemView{
+    @Inject
+    lateinit var imageLoader: IImageLoader<ImageView>
+
+    inner class ViewHolder(val vb: TrackItemViewBinding) : RecyclerView.ViewHolder(vb.root),
+        ITrackListItemView {
         override fun setTitle(text: String) = with(vb) {
-            tvTitleArtistTrack.text= "Трек: $text"
+            tvTitleArtistTrack.text = "Трек: $text"
         }
 
-        override fun setAlbum(title: String) = with(vb){
-            tvAlbum.text="Альбом: $title"
+        override fun setAlbum(title: String) = with(vb) {
+            tvAlbum.text = "Альбом: $title"
         }
 
-        override fun loadCover(url: String) = with(vb){
+        override fun loadCover(url: String) = with(vb) {
             imageLoader.load(url, ivAlbum)
         }
 
@@ -34,11 +36,12 @@ class ArtistTracksRVAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-        ViewHolder(TrackItemViewBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false
-        )
+        ViewHolder(
+            TrackItemViewBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
         ).apply {
             itemView.setOnClickListener { presenter.itemClickListener?.invoke(this) }
         }
@@ -49,4 +52,5 @@ class ArtistTracksRVAdapter(
         })
 
     override fun getItemCount(): Int = presenter.getCount()
+
 }

@@ -10,12 +10,13 @@ import ru.alinadorozhkina.musicapp.mvp.model.repo.ITrackListRepo
 import ru.alinadorozhkina.musicapp.mvp.model.view.TrackLisView
 import ru.alinadorozhkina.musicapp.mvp.model.view.list.ITrackListItemView
 import ru.alinadorozhkina.musicapp.mvp.presenter.list.ITrackListItemPresenter
+import javax.inject.Inject
+import javax.inject.Named
 
-class ArtistTracksPresenter(
-    val trackListRepoRetrofit: ITrackListRepo,
-    val uiSchedular: Scheduler,
-    val artist: Artist,
-): MvpPresenter<TrackLisView>() {
+class ArtistTracksPresenter(val artist: Artist): MvpPresenter<TrackLisView>() {
+
+    @field:Named("ui-thread")@Inject lateinit var uiSchedular: Scheduler
+    @Inject lateinit var trackListRepoRetrofit: ITrackListRepo
 
     class ArtistTracksListPresenter: ITrackListItemPresenter{
         val tracks = mutableListOf<ArtistTrack>()
@@ -29,6 +30,7 @@ class ArtistTracksPresenter(
         }
 
         override fun getCount(): Int = tracks.size
+
     }
 
     val trackListPresenter = ArtistTracksListPresenter()
@@ -42,10 +44,12 @@ class ArtistTracksPresenter(
 
     private fun loadTracks() {
         val disposable = artist.let {
+            Log.v("Presenter", artist.toString())
             trackListRepoRetrofit.getTrackList(it)
                 .observeOn(uiSchedular)
-                .subscribe({
-                    it.data.let { it1 -> trackListPresenter.tracks.addAll(it1)
+                .subscribe({ artistTrackList ->
+                    artistTrackList.data.let { list ->
+                         trackListPresenter.tracks.addAll(list)
                         viewState.updateList()}
                 }, {
                     Log.v("Presenter", "ошибка" + it.message)
@@ -59,4 +63,5 @@ class ArtistTracksPresenter(
         compositeDisposable.dispose()
         super.onDestroy()
     }
+
 }

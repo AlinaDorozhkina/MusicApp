@@ -9,7 +9,9 @@ import ru.alinadorozhkina.musicapp.ui.fragments.ArtistTracksFragment
 import ru.alinadorozhkina.musicapp.ui.fragments.TopTracksFragment
 
 class AndroidScreens : IScreens {
+
     override fun topList() = FragmentScreen { TopTracksFragment.newInstance() }
     override fun artist(artist: Artist) = FragmentScreen { ArtistFragment.newInstance(artist) }
     override fun artistTracks(artist: Artist): Screen = FragmentScreen { ArtistTracksFragment.newInstance(artist) }
+
 }

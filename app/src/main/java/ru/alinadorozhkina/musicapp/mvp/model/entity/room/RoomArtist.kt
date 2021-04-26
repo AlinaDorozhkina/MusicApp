@@ -12,4 +12,5 @@ class RoomArtist(
     @Expose var name: String,
     @Expose val picture: String,
     @Expose val tracklist: String
+
 )

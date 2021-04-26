@@ -9,4 +9,4 @@ data class Album(
     @Expose val id: Int,
     @Expose val title: String,
     @Expose val cover: String,
-    ) : Parcelable
+) : Parcelable
