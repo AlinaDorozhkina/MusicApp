@@ -6,7 +6,7 @@ import io.reactivex.rxjava3.subjects.PublishSubject
 
 interface IAudioPlayer {
     //val observable:  Observable<T>
-    fun create(song: String): Single<Int>
+    fun create(song: String): Observable<Int>
     //fun currentPosition(): PublishSubject<T>
     fun stop()
     fun clear()
