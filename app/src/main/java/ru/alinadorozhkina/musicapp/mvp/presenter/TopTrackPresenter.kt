@@ -59,16 +59,6 @@ class TopTrackPresenter : MvpPresenter<TopTrackView>() {
                         if (duration !== null) {
 
                             Log.v("progress", duration.toString())
-//                            view.seekbarMax(duration)
-//                            val timer = object : CountDownTimer(duration.toLong(), 1000) {
-//                                override fun onTick(millisUntilFinished: Long) {
-//                                   view.seekbarProgress(millisUntilFinished.div(1000).toInt())
-//                                }
-//                                override fun onFinish() {
-//                                    view.seekbarProgress(0)
-//                                }
-//                            }
-//                            timer.start()
 
                         }
                     }, {
