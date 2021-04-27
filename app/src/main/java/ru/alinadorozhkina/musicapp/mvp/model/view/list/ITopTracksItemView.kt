@@ -1,7 +1,5 @@
 package ru.alinadorozhkina.musicapp.mvp.model.view.list
 
-import android.net.Uri
-
 interface ITopTracksItemView : IItemView {
     fun init ()
     fun setTitle(title: String)

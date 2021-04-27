@@ -60,8 +60,6 @@ class TopTracksFragment : MvpAppCompatFragment(), TopTrackView {
         ui?.rvTracks?.adapter?.notifyDataSetChanged()
     }
 
-
-
     override fun onDestroyView() {
         super.onDestroyView()
         ui = null

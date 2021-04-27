@@ -20,10 +20,13 @@ class ArtistTracksRVAdapter(val presenter: ITrackListItemPresenter) :
     inner class ViewHolder(val vb: TrackItemViewBinding) : RecyclerView.ViewHolder(vb.root),
         ITrackListItemView {
         override fun setTitle(text: String) = with(vb) {
+            tvAlbum.isSelected = true
             tvTitleArtistTrack.text = "Трек: $text"
+
         }
 
         override fun setAlbum(title: String) = with(vb) {
+            tvAlbum.isSelected = true
             tvAlbum.text = "Альбом: $title"
         }
 
