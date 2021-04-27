@@ -1,6 +1,5 @@
 package ru.alinadorozhkina.musicapp.mvp.model.view.list
 
-
 interface ITopTracksItemView : IItemView {
     fun init ()
     fun setTitle(title: String)

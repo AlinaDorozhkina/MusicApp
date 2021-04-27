@@ -48,11 +48,10 @@ class TopTracksRVAdapter(val presenter: ITopTracksListPresenter) :
             buttonStop.setOnClickListener {
                 presenter.stopClicked()
             }
-
-           seekbar.isEnabled=false
         }
 
         override fun setTitle(title: String) = with(vb) {
+            tvTitle.isSelected = true
             tvTitle.text = title
         }
 
@@ -61,6 +60,7 @@ class TopTracksRVAdapter(val presenter: ITopTracksListPresenter) :
         }
 
         override fun setArtist(artist: String) = with(vb) {
+            tvTitle.isSelected = true
             tvArtist.text = artist
         }
 
