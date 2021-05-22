@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     app:cardCornerRadius="8dp"
     app:cardElevation="8dp"
-    app:cardBackgroundColor="@color/pink_light"
+    app:cardBackgroundColor="?attr/colorPrimaryVariant"
     app:cardUseCompatPadding="true"
     >
 
@@ -71,7 +71,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:background="@color/pink_main"
+        android:background="?attr/colorSecondaryVariant"
         android:layout_marginTop="@dimen/margin_padding_size_small">
 
         <com.google.android.material.button.MaterialButton
