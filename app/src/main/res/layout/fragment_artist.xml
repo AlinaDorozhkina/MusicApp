@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/viewBackgroundStyle"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".ui.fragments.ArtistFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
     <TextView
         android:id="@+id/tv_artist_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_padding_size_medium"
-        style="@style/main_text"
-        android:textAlignment="center"/>
+        style="@style/BaseText.main_text" />
 
     <ImageView
         android:id="@+id/artist_picture"
@@ -27,5 +32,7 @@
         android:text="Показать трек лист"
         android:layout_margin="@dimen/margin_padding_size_medium"
         android:backgroundTint="@color/pink_main"/>
+    </LinearLayout>
+    <include layout="@layout/bottom_sheet" />
 
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

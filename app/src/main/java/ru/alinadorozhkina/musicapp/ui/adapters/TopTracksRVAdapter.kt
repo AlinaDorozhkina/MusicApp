@@ -4,7 +4,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import ru.alinadorozhkina.musicapp.R
 import ru.alinadorozhkina.musicapp.databinding.ItemViewBinding
 import ru.alinadorozhkina.musicapp.mvp.model.image.IImageLoader
 import ru.alinadorozhkina.musicapp.mvp.model.view.list.ITopTracksItemView
@@ -41,12 +43,20 @@ class TopTracksRVAdapter(val presenter: ITopTracksListPresenter) :
 
     inner class ViewHolder(val vb: ItemViewBinding) : RecyclerView.ViewHolder(vb.root),
         ITopTracksItemView {
+
+        private var flag = false
+
         override fun init() = with(vb) {
             buttonPlay.setOnClickListener {
                 presenter.playClicked(pos, this@ViewHolder)
             }
             buttonStop.setOnClickListener {
                 presenter.stopClicked()
+            }
+
+            buttonFavourites.setOnClickListener {
+                presenter.favouritesClicked(pos)
+                // поменять изображение
             }
         }
 

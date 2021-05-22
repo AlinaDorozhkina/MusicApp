@@ -38,6 +38,7 @@ class TopTrackPresenter : MvpPresenter<TopTrackView>() {
         override fun bindView(view: ITopTracksItemView) {
             val track = tracks[view.pos]
             view.init()
+            Log.v("TAG", track.toString() )
             track.title.let { view.setTitle(it) }
             track.artist.let { it.name.let { name -> view.setArtist(name) } }
             track.position.let { view.setPosition(it) }
@@ -76,6 +77,10 @@ class TopTrackPresenter : MvpPresenter<TopTrackView>() {
             audioPlayer.stop()
         }
 
+        override fun favouritesClicked(position: Int) {
+            val favourites = tracks[position]
+            Log.v("Favourites", favourites.toString())
+        }
     }
 
     val topTrackListPresenter = TopTracksListPresenter()

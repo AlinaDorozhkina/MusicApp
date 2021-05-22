@@ -3,11 +3,13 @@ package ru.alinadorozhkina.musicapp.ui.fragments
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import ru.alinadorozhkina.musicapp.databinding.FragmentTopTracksBinding
+import ru.alinadorozhkina.musicapp.databinding.TopTracksFragmentBinding
 import ru.alinadorozhkina.musicapp.mvp.model.view.TopTrackView
 import ru.alinadorozhkina.musicapp.mvp.presenter.TopTrackPresenter
 import ru.alinadorozhkina.musicapp.ui.App
@@ -21,14 +23,14 @@ class TopTracksFragment : MvpAppCompatFragment(), TopTrackView {
         }
     }
 
-    private var ui: FragmentTopTracksBinding? = null
+    private var ui: TopTracksFragmentBinding? = null
     private var adapter: TopTracksRVAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = FragmentTopTracksBinding.inflate(inflater, container, false).also {
+    ) =  TopTracksFragmentBinding.inflate(inflater, container, false).also {
         ui = it
     }.root
 

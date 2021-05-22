@@ -18,6 +18,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     @Inject
     lateinit var navigatorHolder: NavigatorHolder
     val navigator = AppNavigator(this, R.id.container)
+
     private val presenter by moxyPresenter {
         MainPresenter().apply {
             App.instance.appComponent.inject(this)

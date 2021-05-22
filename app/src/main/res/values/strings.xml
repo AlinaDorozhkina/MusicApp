@@ -6,4 +6,7 @@
 
 
     <string name="track_title">"Трек: $text"</string>
+    <string name="favourites">плей-лист</string>
+    <string name="settings">настройки</string>
+    <string name="search">поиск</string>
 </resources>
