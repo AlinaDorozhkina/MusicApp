@@ -6,6 +6,7 @@ import ru.alinadorozhkina.musicapp.mvp.presenter.*
 import ru.alinadorozhkina.musicapp.ui.activities.MainActivity
 import ru.alinadorozhkina.musicapp.ui.adapters.ArtistTracksRVAdapter
 import ru.alinadorozhkina.musicapp.ui.adapters.TopTracksRVAdapter
+import ru.alinadorozhkina.musicapp.ui.fragments.SettingsFragment
 
 @SuperScope
 @Component(
@@ -25,6 +26,7 @@ interface AppComponent {
 
     fun inject(topTrackPresenter: TopTrackPresenter)
     fun inject(mainActivity: MainActivity)
+    fun inject(settingsFragment: SettingsFragment)
     fun inject(mainPresenter: MainPresenter)
     fun inject(artistPresenter: ArtistPresenter)
     fun inject(artistTracksPresenter: ArtistTracksPresenter)

@@ -2,25 +2,20 @@ package ru.alinadorozhkina.musicapp.ui.fragments
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.view.children
-import androidx.core.view.get
-import com.google.android.material.chip.Chip
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
+import ru.alinadorozhkina.helper.Prefs
 import ru.alinadorozhkina.musicapp.R
 import ru.alinadorozhkina.musicapp.databinding.FragmentSettingsBinding
-import ru.alinadorozhkina.musicapp.databinding.TopTracksFragmentBinding
 import ru.alinadorozhkina.musicapp.mvp.model.view.SettingsView
 import ru.alinadorozhkina.musicapp.mvp.presenter.SettingsPresenter
-import ru.alinadorozhkina.musicapp.mvp.presenter.TopTrackPresenter
 import ru.alinadorozhkina.musicapp.ui.App
 import ru.alinadorozhkina.musicapp.ui.activities.MainActivity
-import ru.alinadorozhkina.musicapp.ui.activities.ThemeHolder
+import javax.inject.Inject
+
 
 class SettingsFragment : MvpAppCompatFragment(), SettingsView {
 
@@ -30,24 +25,38 @@ class SettingsFragment : MvpAppCompatFragment(), SettingsView {
             App.instance.appComponent.inject(this)
         }
     }
+    @Inject
+    lateinit var prefs: Prefs
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        App.instance.appComponent.inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = FragmentSettingsBinding.inflate(inflater, container, false).also { it ->
+    ) = FragmentSettingsBinding.inflate(inflater, container, false).also {
         ui = it
+    }.root
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         ui?.chipGroup?.setOnCheckedChangeListener { chipGroup, id ->
+            Log.v("Settings", id.toString())
             when (id) {
-                R.id.pink_theme -> ThemeHolder.theme =R.style.Theme_MusicApp_Pink
-                R.id.blue_theme -> ThemeHolder.theme = R.style.Theme_MusicApp_Blue
-                R.id.dark_theme -> ThemeHolder.theme = R.style.Theme_MusicApp_Night
+                R.id.pink_theme -> prefs.themeColor = "pink"
+                R.id.blue_theme -> prefs.themeColor = "blue"
+                R.id.dark_theme -> prefs.themeColor = "night"
             }
             requireActivity().recreate()
         }
-    }.root
+    }
 
     companion object {
         fun newInstance() = SettingsFragment()
     }
+
+
 }
