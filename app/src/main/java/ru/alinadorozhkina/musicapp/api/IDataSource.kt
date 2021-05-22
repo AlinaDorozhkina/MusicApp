@@ -2,6 +2,7 @@ package ru.alinadorozhkina.musicapp.api
 
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
+import retrofit2.http.Query
 import retrofit2.http.Url
 import ru.alinadorozhkina.musicapp.mvp.model.entity.ArtistTrackList
 import ru.alinadorozhkina.musicapp.mvp.model.entity.Chart

@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import ru.alinadorozhkina.musicapp.R
 import ru.alinadorozhkina.musicapp.databinding.TrackItemViewBinding
 import ru.alinadorozhkina.musicapp.mvp.model.image.IImageLoader
 import ru.alinadorozhkina.musicapp.mvp.model.view.list.ITrackListItemView
@@ -22,7 +21,6 @@ class ArtistTracksRVAdapter(val presenter: ITrackListItemPresenter) :
         override fun setTitle(text: String) = with(vb) {
             tvAlbum.isSelected = true
             tvTitleArtistTrack.text = "Трек: $text"
-
         }
 
         override fun setAlbum(title: String) = with(vb) {

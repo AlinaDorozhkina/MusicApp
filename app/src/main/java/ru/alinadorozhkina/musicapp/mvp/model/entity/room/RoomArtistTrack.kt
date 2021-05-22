@@ -20,5 +20,6 @@ data class RoomArtistTrack(
     @Embedded
     val album: Album,
     val duration: Int,
-    var artistId: String
+    var artistId: String,
+    var preview: String
 )

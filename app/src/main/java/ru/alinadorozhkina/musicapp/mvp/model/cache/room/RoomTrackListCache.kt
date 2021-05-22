@@ -19,7 +19,7 @@ class RoomTrackListCache(val db: DataBase): ITrackListCache {
             db.artistDao.findByName(it)
         }
         db.artistTrackListDao.findForArtist(roomArtistTrack.id.toString()).map {
-            ArtistTrack(it.id, it.title, artist, it.album, it.duration)
+            ArtistTrack(it.id, it.title, artist, it.album, it.duration, it.preview)
         }.let {
             ArtistTrackList(it, it.size)
         }
@@ -36,7 +36,8 @@ class RoomTrackListCache(val db: DataBase): ITrackListCache {
                 it.title,
                 it.album,
                 it.duration,
-                roomArtist.id.toString()
+                roomArtist.id.toString(),
+                it.preview
             )
         }
         db.artistTrackListDao.getArtistTracks().let {

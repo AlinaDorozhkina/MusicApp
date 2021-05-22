@@ -1,11 +1,11 @@
 package ru.alinadorozhkina.musicapp.mvp.model.repo
 
+import android.util.Log
 import io.reactivex.rxjava3.schedulers.Schedulers
 import ru.alinadorozhkina.musicapp.api.IDataSource
 import ru.alinadorozhkina.musicapp.mvp.model.cache.ITrackListCache
 import ru.alinadorozhkina.musicapp.mvp.model.entity.Artist
 import ru.alinadorozhkina.musicapp.mvp.model.network.INetworkStatus
-
 
 class RetrofitTrackListRepo(
     val api: IDataSource,
@@ -16,6 +16,7 @@ class RetrofitTrackListRepo(
     override fun getTrackList(artist: Artist) = networkStatus.isOnlineSingle().flatMap { isOnline ->
         if (isOnline) {
             artist.tracklist.let { url ->
+                Log.v("URL", url)
                 api.getTrackList(url)
                     .flatMap { artistTrackList ->
                         cache.putArtistTrackList(artist, artistTrackList)

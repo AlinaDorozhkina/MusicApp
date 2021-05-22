@@ -9,4 +9,6 @@ import moxy.viewstate.strategy.StateStrategyType
 interface ArtistView : MvpView {
     fun setArtistName(name: String)
     fun setArtistPicture(bitmap: Bitmap)
+    fun init()
+    fun updateList()
 }

@@ -29,7 +29,6 @@ interface AppComponent {
     fun inject(settingsFragment: SettingsFragment)
     fun inject(mainPresenter: MainPresenter)
     fun inject(artistPresenter: ArtistPresenter)
-    fun inject(artistTracksPresenter: ArtistTracksPresenter)
     fun inject(topTrackRVAdapter: TopTracksRVAdapter)
     fun inject(artistTracksRVAdapter: ArtistTracksRVAdapter)
     fun inject(topTracksListPresenter: TopTrackPresenter.TopTracksListPresenter)
