@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
-import ru.alinadorozhkina.musicapp.databinding.FragmentTopTracksBinding
 import ru.alinadorozhkina.musicapp.databinding.TopTracksFragmentBinding
 import ru.alinadorozhkina.musicapp.mvp.model.view.TopTrackView
 import ru.alinadorozhkina.musicapp.mvp.presenter.TopTrackPresenter

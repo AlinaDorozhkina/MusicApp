@@ -17,9 +17,9 @@
     <color name="bronze">#B35A3A</color>
 
     <color name="bronze2">#A63D1D</color>
-    <color name="background">#f3e5f5</color>
+    <color name="background">#29434e</color>
 
-    <color name="purple_main">#80deea</color>
-    <color name="purple_dark">#4bacb8</color>
-    <color name="purple_light">#b4ffff</color>
+    <color name="purple_main">#1565c0</color>
+    <color name="purple_dark">#003c8f</color>
+    <color name="purple_light">#5e92f3</color>
 </resources>

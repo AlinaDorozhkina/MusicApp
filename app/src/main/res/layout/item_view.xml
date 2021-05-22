@@ -59,8 +59,9 @@
 
         <ImageView
             android:id="@+id/ivPoster"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="@dimen/image_size"
+            android:layout_height="@dimen/image_size"
+            android:layout_marginEnd="@dimen/margin_padding_size_small"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_title"
             app:layout_constraintBottom_toBottomOf="parent"/>
@@ -76,12 +77,8 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_favourites"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
+            style="@style/MyIconButtonStyle"
             app:icon="@drawable/ic_baseline_favorite_border_24"
-            android:background="@android:color/transparent"
-            app:rippleColor="@color/gold"
             />
         <SeekBar
             android:id="@+id/seekbar"
@@ -91,16 +88,16 @@
             android:layout_gravity="center"
             android:layout_weight="1"/>
 
-        <ImageButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button_play"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@android:drawable/ic_media_play" />
-        <ImageButton
+            style="@style/MyIconButtonStyle"
+
+            app:icon="@android:drawable/ic_media_play" />
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button_stop"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@android:drawable/ic_media_pause" />
+            style="@style/MyIconButtonStyle"
+            app:icon="@android:drawable/ic_media_pause"
+            android:layout_marginEnd="@dimen/margin_padding_size_small"/>
 
 
     </LinearLayout>
