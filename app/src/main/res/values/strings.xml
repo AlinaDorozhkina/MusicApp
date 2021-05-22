@@ -8,4 +8,5 @@
     <string name="favourites">плей-лист</string>
     <string name="settings">настройки</string>
     <string name="search">поиск</string>
+    <string name="search_hint">Введте имя артиста</string>
 </resources>

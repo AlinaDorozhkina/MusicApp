@@ -126,8 +126,9 @@ class TopTrackPresenter : MvpPresenter<TopTrackView>() {
         router.navigateTo(screens.settings())
     }
 
-    fun seaarchClicked() {
-        TODO("Not yet implemented")
+
+    fun search(s: String) {
+
     }
 
 }
