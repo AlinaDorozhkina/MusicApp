@@ -6,6 +6,7 @@ import ru.alinadorozhkina.musicapp.mvp.model.entity.Artist
 import ru.alinadorozhkina.musicapp.mvp.navigation.IScreens
 import ru.alinadorozhkina.musicapp.ui.fragments.ArtistFragment
 import ru.alinadorozhkina.musicapp.ui.fragments.ArtistTracksFragment
+import ru.alinadorozhkina.musicapp.ui.fragments.SettingsFragment
 import ru.alinadorozhkina.musicapp.ui.fragments.TopTracksFragment
 
 class AndroidScreens : IScreens {
@@ -13,5 +14,6 @@ class AndroidScreens : IScreens {
     override fun topList() = FragmentScreen { TopTracksFragment.newInstance() }
     override fun artist(artist: Artist) = FragmentScreen { ArtistFragment.newInstance(artist) }
     override fun artistTracks(artist: Artist): Screen = FragmentScreen { ArtistTracksFragment.newInstance(artist) }
+    override fun settings(): Screen = FragmentScreen { SettingsFragment.newInstance()}
 
 }

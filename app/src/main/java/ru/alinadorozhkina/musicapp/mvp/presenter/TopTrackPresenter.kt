@@ -118,4 +118,16 @@ class TopTrackPresenter : MvpPresenter<TopTrackView>() {
         super.onDestroy()
     }
 
+    fun favouritesClicked() {
+        TODO("Not yet implemented")
+    }
+
+    fun settingsClicked() {
+        router.navigateTo(screens.settings())
+    }
+
+    fun seaarchClicked() {
+        TODO("Not yet implemented")
+    }
+
 }

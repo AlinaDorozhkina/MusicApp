@@ -4,7 +4,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
-
     <string name="track_title">"Трек: $text"</string>
     <string name="favourites">плей-лист</string>
     <string name="settings">настройки</string>

@@ -1,17 +1,18 @@
 package ru.alinadorozhkina.musicapp.ui.fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.ViewGroup
+import android.view.*
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
+import ru.alinadorozhkina.musicapp.R
 import ru.alinadorozhkina.musicapp.databinding.TopTracksFragmentBinding
 import ru.alinadorozhkina.musicapp.mvp.model.view.TopTrackView
 import ru.alinadorozhkina.musicapp.mvp.presenter.TopTrackPresenter
 import ru.alinadorozhkina.musicapp.ui.App
+import ru.alinadorozhkina.musicapp.ui.activities.MainActivity
 import ru.alinadorozhkina.musicapp.ui.adapters.TopTracksRVAdapter
 
 class TopTracksFragment : MvpAppCompatFragment(), TopTrackView {
@@ -35,6 +36,28 @@ class TopTracksFragment : MvpAppCompatFragment(), TopTrackView {
 
     companion object {
         fun newInstance() = TopTracksFragment()
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val context = activity as MainActivity
+        context.setSupportActionBar(view.findViewById(R.id.bottomAppBar))
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.bottom_app_bar, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.favourite-> presenter.favouritesClicked()
+            R.id.settings -> presenter.settingsClicked()
+            R.id.search -> presenter.seaarchClicked()
+            //android.R.id.home -> presenter.homeClicked()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun setTopTrackAmount(total: Int) {

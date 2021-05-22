@@ -2,10 +2,7 @@ package ru.alinadorozhkina.musicapp.di
 
 import dagger.Component
 import ru.alinadorozhkina.musicapp.di.module.*
-import ru.alinadorozhkina.musicapp.mvp.presenter.ArtistPresenter
-import ru.alinadorozhkina.musicapp.mvp.presenter.ArtistTracksPresenter
-import ru.alinadorozhkina.musicapp.mvp.presenter.MainPresenter
-import ru.alinadorozhkina.musicapp.mvp.presenter.TopTrackPresenter
+import ru.alinadorozhkina.musicapp.mvp.presenter.*
 import ru.alinadorozhkina.musicapp.ui.activities.MainActivity
 import ru.alinadorozhkina.musicapp.ui.adapters.ArtistTracksRVAdapter
 import ru.alinadorozhkina.musicapp.ui.adapters.TopTracksRVAdapter
@@ -34,5 +31,6 @@ interface AppComponent {
     fun inject(topTrackRVAdapter: TopTracksRVAdapter)
     fun inject(artistTracksRVAdapter: ArtistTracksRVAdapter)
     fun inject(topTracksListPresenter: TopTrackPresenter.TopTracksListPresenter)
+    fun inject(settingsPresenter: SettingsPresenter)
 
 }

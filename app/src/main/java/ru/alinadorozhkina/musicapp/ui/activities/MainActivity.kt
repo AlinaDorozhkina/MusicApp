@@ -27,6 +27,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(ThemeHolder.theme)
         App.instance.appComponent.inject(this)
         ui = ActivityMainBinding.inflate(layoutInflater)
         setContentView(ui?.root)
@@ -41,4 +42,8 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         super.onPause()
         navigatorHolder.removeNavigator()
     }
+}
+
+object ThemeHolder {
+    var theme = R.style.Theme_MusicApp_Pink
 }
