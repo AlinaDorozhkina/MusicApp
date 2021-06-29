@@ -6,7 +6,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import ru.alinadorozhkina.musicapp.databinding.TrackItemViewBinding
 import ru.alinadorozhkina.musicapp.mvp.model.image.IImageLoader
-import ru.alinadorozhkina.musicapp.mvp.model.view.list.ITrackListItemView
+import ru.alinadorozhkina.musicapp.mvp.views.list.list.ITrackListItemView
 import ru.alinadorozhkina.musicapp.mvp.presenter.list.ITrackListItemPresenter
 import javax.inject.Inject
 
@@ -19,13 +19,13 @@ class ArtistTracksRVAdapter(val presenter: ITrackListItemPresenter) :
     inner class ViewHolder(val vb: TrackItemViewBinding) : RecyclerView.ViewHolder(vb.root),
         ITrackListItemView {
         override fun setTitle(text: String) = with(vb) {
-            tvAlbum.isSelected = true
             tvTitleArtistTrack.text = "Трек: $text"
+            tvTitleArtistTrack.isSelected = true
         }
 
         override fun setAlbum(title: String) = with(vb) {
-            tvAlbum.isSelected = true
             tvAlbum.text = "Альбом: $title"
+            tvAlbum.isSelected = true
         }
 
         override fun loadCover(url: String) = with(vb) {

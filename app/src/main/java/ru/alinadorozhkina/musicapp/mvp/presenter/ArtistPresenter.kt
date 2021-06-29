@@ -10,8 +10,8 @@ import ru.alinadorozhkina.musicapp.mvp.model.cache.IImageCache
 import ru.alinadorozhkina.musicapp.mvp.model.entity.Artist
 import ru.alinadorozhkina.musicapp.mvp.model.entity.ArtistTrack
 import ru.alinadorozhkina.musicapp.mvp.model.repo.ITrackListRepo
-import ru.alinadorozhkina.musicapp.mvp.model.view.ArtistView
-import ru.alinadorozhkina.musicapp.mvp.model.view.list.ITrackListItemView
+import ru.alinadorozhkina.musicapp.mvp.views.ArtistView
+import ru.alinadorozhkina.musicapp.mvp.views.list.list.ITrackListItemView
 import ru.alinadorozhkina.musicapp.mvp.navigation.IScreens
 import ru.alinadorozhkina.musicapp.mvp.presenter.list.ITrackListItemPresenter
 import javax.inject.Inject

@@ -8,6 +8,9 @@ import ru.alinadorozhkina.musicapp.mvp.model.entity.room.dao.ArtistDao
 import ru.alinadorozhkina.musicapp.mvp.model.entity.room.dao.ArtistTrackListDao
 import ru.alinadorozhkina.musicapp.mvp.model.entity.room.dao.ChartTrackDao
 import ru.alinadorozhkina.musicapp.mvp.model.entity.room.dao.ImageDao
+/*
+изучить миграции
+ */
 
 @androidx.room.Database(
     entities = [
@@ -16,7 +19,7 @@ import ru.alinadorozhkina.musicapp.mvp.model.entity.room.dao.ImageDao
         RoomArtist::class,
         RoomCachedImage::class
     ],
-    version = 5,
+    version = 6,
     exportSchema = true
 )
 abstract class DataBase : RoomDatabase() {
@@ -26,7 +29,7 @@ abstract class DataBase : RoomDatabase() {
     abstract val imageDao: ImageDao
 
     companion object {
-        const val DB_NAME = "data_base5.db"
+        const val DB_NAME = "data_base6.db"
         private var instance: DataBase? = null
         fun create(context: Context) {
             if (instance == null) {

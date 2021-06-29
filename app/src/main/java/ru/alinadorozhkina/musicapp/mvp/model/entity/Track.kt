@@ -11,7 +11,10 @@ data class Track(
     @Expose val title: String,
     @Expose val position: Int,
     @Expose val artist: Artist,
+    @Expose val album: Album,
     @Expose val preview: String,
+    @Expose val title_short: String,
+    @Expose val explicit_lyrics: Boolean
 ) : Parcelable
 
 

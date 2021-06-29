@@ -14,7 +14,7 @@ import moxy.ktx.moxyPresenter
 import ru.alinadorozhkina.musicapp.R
 import ru.alinadorozhkina.musicapp.databinding.FragmentArtistInfoBinding
 import ru.alinadorozhkina.musicapp.mvp.model.entity.Artist
-import ru.alinadorozhkina.musicapp.mvp.model.view.ArtistView
+import ru.alinadorozhkina.musicapp.mvp.views.ArtistView
 import ru.alinadorozhkina.musicapp.mvp.presenter.ArtistPresenter
 import ru.alinadorozhkina.musicapp.ui.App
 import ru.alinadorozhkina.musicapp.ui.adapters.ArtistTracksRVAdapter
@@ -25,16 +25,6 @@ class ArtistInfoFragment : MvpAppCompatFragment(), ArtistView {
 
     private var adapter: ArtistTracksRVAdapter? = null
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
-
-    companion object {
-        fun newInstance(artist: Artist): ArtistInfoFragment {
-            val args = Bundle()
-            args.putParcelable(ARTIST_VALUE, artist)
-            val f = ArtistInfoFragment()
-            f.arguments = args
-            return f
-        }
-    }
 
     private var ui: FragmentArtistInfoBinding? = null
 
@@ -92,5 +82,15 @@ class ArtistInfoFragment : MvpAppCompatFragment(), ArtistView {
     private fun setBottomSheetBehavior(bottomSheet: ConstraintLayout) {
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+    }
+
+    companion object {
+        fun newInstance(artist: Artist): ArtistInfoFragment {
+            val args = Bundle()
+            args.putParcelable(ARTIST_VALUE, artist)
+            val f = ArtistInfoFragment()
+            f.arguments = args
+            return f
+        }
     }
 }

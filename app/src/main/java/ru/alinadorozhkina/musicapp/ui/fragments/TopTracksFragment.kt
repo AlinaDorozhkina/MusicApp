@@ -3,7 +3,6 @@ package ru.alinadorozhkina.musicapp.ui.fragments
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.ArrayAdapter
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,7 +10,7 @@ import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import ru.alinadorozhkina.musicapp.R
 import ru.alinadorozhkina.musicapp.databinding.TopTracksFragmentBinding
-import ru.alinadorozhkina.musicapp.mvp.model.view.TopTrackView
+import ru.alinadorozhkina.musicapp.mvp.views.TopTrackView
 import ru.alinadorozhkina.musicapp.mvp.presenter.TopTrackPresenter
 import ru.alinadorozhkina.musicapp.ui.App
 import ru.alinadorozhkina.musicapp.ui.activities.MainActivity

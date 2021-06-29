@@ -9,8 +9,8 @@ import ru.alinadorozhkina.musicapp.mvp.model.audio.IAudioPlayer
 import ru.alinadorozhkina.musicapp.mvp.model.entity.Artist
 import ru.alinadorozhkina.musicapp.mvp.model.entity.Track
 import ru.alinadorozhkina.musicapp.mvp.model.repo.ITopTracksRepo
-import ru.alinadorozhkina.musicapp.mvp.model.view.TopTrackView
-import ru.alinadorozhkina.musicapp.mvp.model.view.list.ITopTracksItemView
+import ru.alinadorozhkina.musicapp.mvp.views.TopTrackView
+import ru.alinadorozhkina.musicapp.mvp.views.list.list.ITopTracksItemView
 import ru.alinadorozhkina.musicapp.mvp.navigation.IScreens
 import ru.alinadorozhkina.musicapp.mvp.presenter.list.ITopTracksListPresenter
 import javax.inject.Inject
@@ -128,6 +128,7 @@ class TopTrackPresenter : MvpPresenter<TopTrackView>() {
 
 
     fun search(s: String) {
+        router.navigateTo(screens.search(s))
 
     }
 
