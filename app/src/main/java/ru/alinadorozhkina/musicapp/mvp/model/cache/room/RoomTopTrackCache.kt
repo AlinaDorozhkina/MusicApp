@@ -14,7 +14,7 @@ class RoomTopTrackCache(val db: DataBase) : ITopTracksCache {
 
     override fun getTracks() = Single.fromCallable {
         db.chartTracksDao.getChartTracks().map {
-            Track(it.id, it.title, it.position, it.artist, it.preview)
+            Track(it.id, it.title, it.position, it.artist, it.album, it.preview, it.title_short, it.explicit_lyrics)
         }.let { trackList ->
             Chart(trackList.sortedBy { it.position }, trackList.size)
         }
@@ -22,7 +22,7 @@ class RoomTopTrackCache(val db: DataBase) : ITopTracksCache {
 
     override fun putTracks(chart: Chart) = Completable.fromAction {
         val roomTracks: List<RoomTrack> = chart.data.map {
-            RoomTrack(it.id, it.title, it.position, it.artist, it.preview)
+            RoomTrack(it.id, it.title, it.position, it.title_short, it.explicit_lyrics, it.artist, it.album, it.preview)
         }
         db.chartTracksDao.getChartTracks().let {
             if (it.isEmpty()) {

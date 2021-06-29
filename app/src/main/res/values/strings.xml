@@ -9,4 +9,12 @@
     <string name="settings">настройки</string>
     <string name="search">поиск</string>
     <string name="search_hint">Введте имя артиста</string>
+    <string name="confirm_button">Подтвердить</string>
+    <string name="choose_theme">Выберите тему</string>
+    <string name="pink_theme">Розовая тема</string>
+    <string name="blue_theme">Синяя тема</string>
+    <string name="night_theme">Темная тема</string>
+    <string name="top10">ТОП 10 лучших треков</string>
+    <string name="search_deezer">Введите имя артиста</string>
+    <string name="hint_deezer">hint_deezer</string>
 </resources>

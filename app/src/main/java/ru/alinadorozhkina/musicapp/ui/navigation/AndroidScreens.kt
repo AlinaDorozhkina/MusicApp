@@ -11,5 +11,6 @@ class AndroidScreens : IScreens {
     override fun topList() = FragmentScreen { TopTracksFragment.newInstance() }
     override fun artist(artist: Artist) = FragmentScreen { ArtistInfoFragment.newInstance(artist) }
     override fun settings(): Screen = FragmentScreen { SettingsFragment.newInstance()}
+    override fun search(name: String): Screen = FragmentScreen { SearchFragment.newInstance(name)}
 
 }

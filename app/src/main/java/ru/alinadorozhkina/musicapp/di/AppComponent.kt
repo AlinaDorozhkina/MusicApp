@@ -33,5 +33,7 @@ interface AppComponent {
     fun inject(artistTracksRVAdapter: ArtistTracksRVAdapter)
     fun inject(topTracksListPresenter: TopTrackPresenter.TopTracksListPresenter)
     fun inject(settingsPresenter: SettingsPresenter)
+    fun inject(trackInfoPresenter: TrackInfoPresenter)
+    fun inject(searchPresenter: SearchPresenter)
 
 }

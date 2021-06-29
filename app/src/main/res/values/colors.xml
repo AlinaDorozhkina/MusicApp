@@ -7,17 +7,15 @@
     <color name="teal_700">@color/design_default_color_error</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="grey_dark">#102027</color>
+    <color name="grey_dark">#23373E</color>
     <color name="pink_main">#880e4f</color>
     <color name="pink_dark">#560027</color>
     <color name="pink_light">#bc477b</color>
 
-    <color name="gold">#ECA731</color>
-    <color name="silver">#b0bec5</color>
-    <color name="bronze">#B35A3A</color>
-
-    <color name="bronze2">#A63D1D</color>
-    <color name="background">#29434e</color>
+    <color name="gold">#A9FFC30E</color>
+    <color name="silver">#535B60</color>
+    <color name="bronze">#cd7f32</color>
+    <color name="background">#B5BCBF</color>
 
     <color name="purple_main">#1565c0</color>
     <color name="purple_dark">#003c8f</color>

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_marginTop="@dimen/margin_padding_size_medium"
     style="@style/viewBackgroundStyle"
     tools:context=".ui.fragments.SettingsFragment">
 
@@ -13,13 +14,14 @@
         android:layout_height="wrap_content"
         style="@style/BaseText.title_text"
         android:layout_gravity="center"
-        android:text="Choose One" />
+        android:layout_marginTop="@dimen/margin_padding_size_medium"
+        android:text="@string/choose_theme" />
 
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/chipGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_padding_size_medium"
+        android:layout_marginTop="@dimen/margin_padding_size_medium"
         app:singleSelection="true">
 
         <com.google.android.material.chip.Chip
@@ -27,22 +29,30 @@
             style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Розовая тема" />
+            android:text="@string/pink_theme" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/blue_theme"
             style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Синяя тема" />
+            android:text="@string/blue_theme" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/dark_theme"
             style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Темная тема" />
+            android:text="@string/night_theme" />
 
     </com.google.android.material.chip.ChipGroup>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/confirm_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_padding_size_medium"
+        app:cornerRadius="10dp"
+        android:text="@string/confirm_button"/>
 
 </LinearLayout>
