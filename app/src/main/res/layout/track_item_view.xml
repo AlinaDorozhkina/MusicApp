@@ -23,7 +23,7 @@
             <TextView
                 android:id="@+id/tv_title_artist_track"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/ivAlbum"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:text="трек"
                 style="@style/ScrollingText" />
@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_title_artist_track"
-                app:layout_constraintEnd_toStartOf="@id/ivAlbum"
+                app:layout_constraintEnd_toEndOf="parent"
                 android:ellipsize="marquee"
                 android:marqueeRepeatLimit="marquee_forever"
                 android:padding="@dimen/margin_padding_size_small"
@@ -43,50 +43,8 @@
                 style="@style/BaseText.main_text"
                 android:text="альбом"/>
 
-            <ImageView
-                android:id="@+id/ivAlbum"
-                android:layout_width="@dimen/image_size"
-                android:layout_height="@dimen/image_size"
-                android:layout_marginEnd="@dimen/margin_padding_size_small"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/colorSecondaryVariant"
-            android:orientation="horizontal">
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/button_favourites"
-                style="@style/MyIconButtonStyle"
-                app:icon="@drawable/ic_baseline_favorite_border_24" />
-
-            <SeekBar
-                android:id="@+id/seekbar"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="16dp"
-                android:layout_weight="1" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/button_play"
-                style="@style/MyIconButtonStyle"
-
-                app:icon="@android:drawable/ic_media_play" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/button_stop"
-                style="@style/MyIconButtonStyle"
-                android:layout_marginEnd="@dimen/margin_padding_size_small"
-                app:icon="@android:drawable/ic_media_pause" />
-
-
-        </LinearLayout>
 
     </LinearLayout>
 

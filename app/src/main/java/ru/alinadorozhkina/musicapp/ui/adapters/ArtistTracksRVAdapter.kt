@@ -18,6 +18,20 @@ class ArtistTracksRVAdapter(val presenter: ITrackListItemPresenter) :
 
     inner class ViewHolder(val vb: TrackItemViewBinding) : RecyclerView.ViewHolder(vb.root),
         ITrackListItemView {
+
+        override var pos = -1
+
+        fun init () =  with(vb){
+//            buttonPlay.setOnClickListener {
+//                presenter.buttonPlayClicked(pos, this@ViewHolder)
+//            }
+//            buttonFavourites.setOnClickListener {
+//                presenter.buttonFavouritesClicked()
+//                 поменять изображение
+//            }
+
+        }
+
         override fun setTitle(text: String) = with(vb) {
             tvTitleArtistTrack.text = "Трек: $text"
             tvTitleArtistTrack.isSelected = true
@@ -28,12 +42,17 @@ class ArtistTracksRVAdapter(val presenter: ITrackListItemPresenter) :
             tvAlbum.isSelected = true
         }
 
-        override fun loadCover(url: String) = with(vb) {
-            imageLoader.load(url, ivAlbum)
+//        override fun loadCover(url: String) = with(vb) {
+//            imageLoader.load(url, ivAlbum)
+//        }
+
+        override fun seekbarMax(duration: Int) {
+
         }
 
-        override var pos = -1
-
+        override fun seekbarProgress(progress: Int) {
+            TODO("Not yet implemented")
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
