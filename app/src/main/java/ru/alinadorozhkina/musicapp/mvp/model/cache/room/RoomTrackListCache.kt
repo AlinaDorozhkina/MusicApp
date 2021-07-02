@@ -31,7 +31,7 @@ class RoomTrackListCache(val db: DataBase): ITrackListCache {
         val a = RoomArtist(
             artistTrackList.data[0].artist.id,
             artistTrackList.data[0].artist.name,
-            artistTrackList.data[0].artist.picture,
+            artistTrackList.data[0].artist.picture_medium,
             artistTrackList.data[0].artist.tracklist,
         )
         db.artistDao.insert(a)
@@ -59,7 +59,7 @@ class RoomTrackListCache(val db: DataBase): ITrackListCache {
     }.subscribeOn(Schedulers.io())
 
     override fun putArtist(artist: Artist) = Completable.fromAction{
-        val art = RoomArtist(artist.id, artist.name, artist.picture, artist.tracklist)
+        val art = RoomArtist(artist.id, artist.name, artist.picture_medium, artist.tracklist)
         db.artistDao.insert(art)
     }.subscribeOn(Schedulers.io())
 

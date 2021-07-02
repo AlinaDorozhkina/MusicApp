@@ -6,7 +6,6 @@ import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import moxy.MvpPresenter
 import ru.alinadorozhkina.musicapp.mvp.model.audio.IAudioPlayer
-import ru.alinadorozhkina.musicapp.mvp.model.entity.Artist
 import ru.alinadorozhkina.musicapp.mvp.model.entity.Track
 import ru.alinadorozhkina.musicapp.mvp.model.repo.ITopTracksRepo
 import ru.alinadorozhkina.musicapp.mvp.views.TopTrackView
@@ -30,6 +29,54 @@ class TopTrackPresenter : MvpPresenter<TopTrackView>() {
     @Inject lateinit var audioPlayer: IAudioPlayer<Int>
 
     val compositeDisposable = CompositeDisposable()
+    val topTrackListPresenter = TopTracksListPresenter()
+
+    override fun onFirstViewAttach() {
+        super.onFirstViewAttach()
+        viewState.init()
+        loadTracks()
+
+        topTrackListPresenter.itemClickListener = { itemView ->
+            val artist = topTrackListPresenter.tracks[itemView.pos].artist.name
+            router.navigateTo(screens.search(artist))
+        }
+    }
+
+    private fun loadTracks() {
+        val disposable = topTracksRepoRetrofit.getTopTracks()
+            .observeOn(uiScheduler)
+            .subscribe({
+                it.data.let { it1 ->
+                    topTrackListPresenter.tracks.addAll(it1)
+                    viewState.setTopTrackAmount(it.total)
+                    viewState.updateList()
+                }
+            }, {
+                Log.v("Presenter loadTracks", "ошибка" + it.message)
+                print(it.message)
+            })
+        compositeDisposable.add(disposable)
+    }
+
+    override fun onDestroy() {
+        compositeDisposable.dispose()
+        audioPlayer.clear()
+        super.onDestroy()
+    }
+
+    fun favouritesClicked() {
+        TODO("Not yet implemented")
+    }
+
+    fun settingsClicked() {
+        router.navigateTo(screens.settings())
+    }
+
+
+    fun search(s: String) {
+        router.navigateTo(screens.search(s))
+
+    }
 
     inner class TopTracksListPresenter : ITopTracksListPresenter {
         val tracks = mutableListOf<Track>()
@@ -42,7 +89,7 @@ class TopTrackPresenter : MvpPresenter<TopTrackView>() {
             track.title.let { view.setTitle(it) }
             track.artist.let { it.name.let { name -> view.setArtist(name) } }
             track.position.let { view.setPosition(it) }
-            track.artist.picture.let { view.loadPoster(it) }
+            track.artist.picture_medium.let { view.loadPoster(it) }
         }
 
         override fun getCount(): Int = tracks.size
@@ -81,55 +128,6 @@ class TopTrackPresenter : MvpPresenter<TopTrackView>() {
             val favourites = tracks[position]
             Log.v("Favourites", favourites.toString())
         }
-    }
-
-    val topTrackListPresenter = TopTracksListPresenter()
-
-    override fun onFirstViewAttach() {
-        super.onFirstViewAttach()
-        viewState.init()
-        loadTracks()
-
-        topTrackListPresenter.itemClickListener = { itemView ->
-            val artist: Artist = topTrackListPresenter.tracks[itemView.pos].artist
-            router.navigateTo(screens.artist(artist))
-        }
-    }
-
-    private fun loadTracks() {
-        val disposable = topTracksRepoRetrofit.getTopTracks()
-            .observeOn(uiScheduler)
-            .subscribe({
-                it.data.let { it1 ->
-                    topTrackListPresenter.tracks.addAll(it1)
-                    viewState.setTopTrackAmount(it.total)
-                    viewState.updateList()
-                }
-            }, {
-                Log.v("Presenter loadTracks", "ошибка" + it.message)
-                print(it.message)
-            })
-        compositeDisposable.add(disposable)
-    }
-
-    override fun onDestroy() {
-        compositeDisposable.dispose()
-        audioPlayer.clear()
-        super.onDestroy()
-    }
-
-    fun favouritesClicked() {
-        TODO("Not yet implemented")
-    }
-
-    fun settingsClicked() {
-        router.navigateTo(screens.settings())
-    }
-
-
-    fun search(s: String) {
-        router.navigateTo(screens.search(s))
-
     }
 
 }

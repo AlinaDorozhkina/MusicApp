@@ -76,8 +76,6 @@ class TopTracksFragment : MvpAppCompatFragment(), TopTrackView {
         when (item.itemId) {
             R.id.favourite -> presenter.favouritesClicked()
             R.id.settings -> presenter.settingsClicked()
-            //R.id.search -> presenter.seaarchClicked()
-            //android.R.id.home -> presenter.homeClicked()
         }
         return super.onOptionsItemSelected(item)
     }
