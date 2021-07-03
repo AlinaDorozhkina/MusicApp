@@ -22,21 +22,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_padding_size_medium"
-        app:singleSelection="true">
+        app:singleSelection="true"
+        >
 
         <com.google.android.material.chip.Chip
             android:id="@+id/pink_theme"
             style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/pink_theme" />
+            android:text="@string/pink_theme"
+            android:backgroundTint="@color/pink_main"/>
 
         <com.google.android.material.chip.Chip
             android:id="@+id/blue_theme"
             style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/blue_theme" />
+            android:text="@string/blue_theme"
+            android:backgroundTint="@color/purple_main"/>
 
         <com.google.android.material.chip.Chip
             android:id="@+id/dark_theme"
@@ -53,6 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_padding_size_medium"
         app:cornerRadius="10dp"
-        android:text="@string/confirm_button"/>
+        android:text="@string/confirm_button"
+        android:backgroundTint="?attr/colorSecondaryVariant"/>
 
 </LinearLayout>
