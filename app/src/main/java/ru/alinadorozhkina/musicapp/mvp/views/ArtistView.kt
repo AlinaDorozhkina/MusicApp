@@ -15,4 +15,5 @@ interface ArtistView : MvpView {
     fun playArtistTrack(track: ArtistTrack)
     fun seekbarMax(duration: Int)
     fun seekbarProgress(progress: Int)
+    fun updatePicture(url: String)
 }

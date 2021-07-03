@@ -1,6 +1,5 @@
 package ru.alinadorozhkina.musicapp.mvp.presenter
 
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Log
 import com.github.terrakok.cicerone.Router
@@ -10,15 +9,15 @@ import moxy.MvpPresenter
 import ru.alinadorozhkina.musicapp.mvp.model.audio.IAudioPlayer
 import ru.alinadorozhkina.musicapp.mvp.model.cache.IImageCache
 import ru.alinadorozhkina.musicapp.mvp.model.entity.ArtistTrack
-import ru.alinadorozhkina.musicapp.mvp.model.entity.Track
 import ru.alinadorozhkina.musicapp.mvp.model.repo.ITrackListRepo
-import ru.alinadorozhkina.musicapp.mvp.views.ArtistView
-import ru.alinadorozhkina.musicapp.mvp.views.list.list.ITrackListItemView
 import ru.alinadorozhkina.musicapp.mvp.navigation.IScreens
 import ru.alinadorozhkina.musicapp.mvp.presenter.list.ITrackListItemPresenter
-import ru.alinadorozhkina.musicapp.mvp.views.list.list.ITopTracksItemView
+import ru.alinadorozhkina.musicapp.mvp.views.ArtistView
+import ru.alinadorozhkina.musicapp.mvp.views.list.list.ITrackListItemView
 import javax.inject.Inject
 import javax.inject.Named
+
+private val TAG = ArtistPresenter::class.java.simpleName
 class ArtistPresenter(val artist: String) : MvpPresenter<ArtistView>() {
 
     @field:Named("ui-thread") @Inject lateinit var uiScheduler: Scheduler
@@ -66,8 +65,34 @@ class ArtistPresenter(val artist: String) : MvpPresenter<ArtistView>() {
         compositeDisposable.add(disposable)
     }
 
+    fun loadTracks(name: String) {
+        viewState.setArtistName(name)
+        val disposable = name.let {
+            Log.v("Presenter", artist)
+            trackListRepoRetrofit.getTrackList(it)
+                .observeOn(uiSchedular)
+                .subscribe({ artistTrackList ->
+                    artistTrackList.data.let { list ->
+                        trackListPresenter.tracks.clear()
+                        trackListPresenter.tracks.addAll(list)
+                        viewState.updatePicture(list[0].artist.picture_medium)
+                        url = list[0].artist.picture_medium
+                        viewState.updateList()}
+                }, {
+                    Log.v("Presenter", "ошибка" + it.message)
+                    print(it.message)
+                })
+        }
+        compositeDisposable.add(disposable)
+        trackListPresenter.itemClickListener = {
+            val track: ArtistTrack = trackListPresenter.tracks[it.pos]
+            viewState.playArtistTrack(track)
+        }
+    }
+
      private fun getPicture(url: String) {
          val disposable =  url.let {
+             Log.v(TAG, url)
              imageCache.getBytes(it)
                  .observeOn(uiSchedular)
                  .subscribe {
@@ -115,6 +140,7 @@ class ArtistPresenter(val artist: String) : MvpPresenter<ArtistView>() {
     fun stopClicked() {
         audioPlayer.stop()
     }
+
 
     inner class ArtistTracksListPresenter: ITrackListItemPresenter {
         val tracks = mutableListOf<ArtistTrack>()

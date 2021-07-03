@@ -1,8 +1,9 @@
 package ru.alinadorozhkina.musicapp.ui.fragments
 
 import android.graphics.Bitmap
-import android.net.Uri
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,21 +13,21 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.bottom_sheet_layout.view.*
+import kotlinx.android.synthetic.main.fragment_artist_info.*
 import kotlinx.android.synthetic.main.layout_main_player.*
 import kotlinx.android.synthetic.main.layout_main_player.view.*
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import ru.alinadorozhkina.musicapp.R
 import ru.alinadorozhkina.musicapp.databinding.FragmentArtistInfoBinding
-import ru.alinadorozhkina.musicapp.mvp.model.entity.Artist
 import ru.alinadorozhkina.musicapp.mvp.model.entity.ArtistTrack
 import ru.alinadorozhkina.musicapp.mvp.model.image.IImageLoader
-import ru.alinadorozhkina.musicapp.mvp.views.ArtistView
 import ru.alinadorozhkina.musicapp.mvp.presenter.ArtistPresenter
+import ru.alinadorozhkina.musicapp.mvp.views.ArtistView
 import ru.alinadorozhkina.musicapp.ui.App
 import ru.alinadorozhkina.musicapp.ui.adapters.ArtistTracksRVAdapter
-import java.lang.RuntimeException
 import javax.inject.Inject
+
 
 private const val ARTIST_VALUE = "artist value"
 
@@ -34,6 +35,7 @@ class ArtistInfoFragment : MvpAppCompatFragment(), ArtistView {
 
     private var adapter: ArtistTracksRVAdapter? = null
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
+
     @Inject
     lateinit var imageLoader: IImageLoader<ImageView>
 
@@ -62,6 +64,26 @@ class ArtistInfoFragment : MvpAppCompatFragment(), ArtistView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setBottomSheetBehavior(view.findViewById(R.id.bottom_sheet_container))
+        ui?.inputLayout?.editText?.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {
+                ui?.inputLayout?.setEndIconOnClickListener {
+                    presenter.loadTracks(s.toString())
+                }
+            }
+
+            override fun beforeTextChanged(
+                s: CharSequence, start: Int,
+                count: Int, after: Int
+            ) {
+            }
+
+            override fun onTextChanged(
+                s: CharSequence, start: Int,
+                before: Int, count: Int
+            ) {
+            }
+        })
+
     }
 
     override fun onDestroyView() {
@@ -132,6 +154,10 @@ class ArtistInfoFragment : MvpAppCompatFragment(), ArtistView {
 
     override fun seekbarProgress(progress: Int) {
         seekbar.progress = progress
+    }
+
+    override fun updatePicture(url: String) {
+        ui?.toolbarArtistImage?.let { imageLoader.load(url, it) }
     }
 
     private fun setBottomSheetBehavior(bottomSheet: ConstraintLayout) {

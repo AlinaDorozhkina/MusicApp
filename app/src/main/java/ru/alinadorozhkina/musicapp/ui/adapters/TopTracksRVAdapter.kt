@@ -69,7 +69,8 @@ class TopTracksRVAdapter(val presenter: ITopTracksListPresenter) :
 
         override fun setPosition(position: Int) = with(vb) {
             tvPosition.text = position.toString()
-            cardContainer.setCardBackgroundColor(getColorRes(context, position))
+            cardContainer.background = getColorRes(context, position)
+            //cardContainer.setCardBackgroundColor(getColorRes(context, position))
         }
 
         override fun setArtist(artist: String) = with(vb) {
