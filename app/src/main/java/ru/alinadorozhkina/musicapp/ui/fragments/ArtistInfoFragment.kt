@@ -26,7 +26,6 @@ import ru.alinadorozhkina.musicapp.ui.App
 import ru.alinadorozhkina.musicapp.ui.adapters.ArtistTracksRVAdapter
 import javax.inject.Inject
 
-
 private const val ARTIST_VALUE = "artist value"
 
 class ArtistInfoFragment : MvpAppCompatFragment(), ArtistView {

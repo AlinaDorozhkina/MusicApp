@@ -1,12 +1,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cardContainer"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:backgroundTint="?attr/colorSecondaryVariant"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="8dp"
-    app:cardUseCompatPadding="true">
+    style="@style/MyCardViewStyle.Background">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,16 +15,14 @@
 
             <TextView
                 android:id="@+id/tv_title_artist_track"
-                style="@style/ScrollingText"
+                style="@style/BaseText.ScrollingText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tv_album"
-                style="@style/ScrollingText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/BaseText.ScrollingText"
                 android:padding="@dimen/margin_padding_size_small"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

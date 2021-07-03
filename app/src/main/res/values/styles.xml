@@ -20,7 +20,7 @@
 
     <style name="BaseText.title_text">
         <item name="android:textSize">@dimen/title_text</item>
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textColor">?colorOnSecondary</item>
         <item name="android:textStyle">bold</item>
     </style>
 
@@ -31,24 +31,19 @@
 
     </style>
 
-    <style name="ScrollingText">
+    <style name="BaseText.ScrollingText">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
-        <item name="maxLines">1</item>
         <item name="android:ellipsize">marquee</item>
         <item name="android:marqueeRepeatLimit">marquee_forever</item>
         <item name="android:scrollHorizontally">true</item>
-        <item name="android:freezesText">true</item>
-        <item name="android:focusableInTouchMode">true</item>
-        <item name="android:focusable">true</item>
         <item name="singleLine">true</item>
-        <item name="android:textAlignment">center</item>
-        <item name="android:textSize">20sp</item>
+
+
     </style>
 
     <style name="viewBackgroundStyle">
         <item name="android:layout_gravity">center</item>
-        <item name="android:background">@color/background</item>
     </style>
 
     <style name="MyButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Icon">
@@ -66,6 +61,20 @@
         <item name="backgroundTint">@android:color/transparent</item>
         <item name="android:layout_width">@dimen/icon_size</item>
         <item name="android:layout_height">@dimen/icon_size</item>
+    </style>
+
+    <style name="MyCardViewStyle">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="cardCornerRadius">@dimen/card_corner</item>
+        <item name="cardElevation">@dimen/card_corner</item>
+        <item name="cardUseCompatPadding">true</item>
+        <item name="android:layout_marginTop">@dimen/margin_padding_size_medium</item>
+
+    </style>
+
+    <style name="MyCardViewStyle.Background">
+        <item name="android:backgroundTint">?attr/colorSecondaryVariant</item>
     </style>
 
 </resources>

@@ -42,4 +42,6 @@
     <string name="clip_heart_hidden" >M18 37 L38 37 L38 37 L18 37 Z</string>
     <string name="path_name_heart_clip">clip</string>
     <string name="clip_heart_shown" translatable="false">M0 0 L56 0 L56 56 L0 56 Z</string>
+    <string name="confirm">Подтвердить</string>
+    <string name="dark_theme">Темная</string>
 </resources>

@@ -1,5 +1,6 @@
 package ru.alinadorozhkina.musicapp.ui.adapters
 
+import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -74,6 +75,7 @@ class TopTracksRVAdapter(val presenter: ITopTracksListPresenter) :
         }
 
         override fun setArtist(artist: String) = with(vb) {
+            tvTitle.isSelected = true
             tvArtist.text = artist
             tvArtist.isSelected = true
         }

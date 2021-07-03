@@ -30,7 +30,6 @@ class ArtistPresenter(val artist: String) : MvpPresenter<ArtistView>() {
 
     val trackListPresenter = ArtistTracksListPresenter()
     val compositeDisposable = CompositeDisposable()
-    var url: String? = null
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -55,7 +54,6 @@ class ArtistPresenter(val artist: String) : MvpPresenter<ArtistView>() {
                     artistTrackList.data.let { list ->
                         trackListPresenter.tracks.addAll(list)
                         getPicture(list[0].artist.picture_medium)
-                        url = list[0].artist.picture_medium
                         viewState.updateList()}
                 }, {
                     Log.v("Presenter", "ошибка" + it.message)
@@ -66,7 +64,6 @@ class ArtistPresenter(val artist: String) : MvpPresenter<ArtistView>() {
     }
 
     fun loadTracks(name: String) {
-        viewState.setArtistName(name)
         val disposable = name.let {
             Log.v("Presenter", artist)
             trackListRepoRetrofit.getTrackList(it)
@@ -76,8 +73,8 @@ class ArtistPresenter(val artist: String) : MvpPresenter<ArtistView>() {
                         trackListPresenter.tracks.clear()
                         trackListPresenter.tracks.addAll(list)
                         viewState.updatePicture(list[0].artist.picture_medium)
-                        url = list[0].artist.picture_medium
-                        viewState.updateList()}
+                        viewState.updateList()
+                        viewState.setArtistName(name)}
                 }, {
                     Log.v("Presenter", "ошибка" + it.message)
                     print(it.message)

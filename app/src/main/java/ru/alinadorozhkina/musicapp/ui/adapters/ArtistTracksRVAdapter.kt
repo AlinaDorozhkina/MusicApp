@@ -21,17 +21,6 @@ class ArtistTracksRVAdapter(val presenter: ITrackListItemPresenter) :
 
         override var pos = -1
 
-        fun init () =  with(vb){
-//            buttonPlay.setOnClickListener {
-//                presenter.buttonPlayClicked(pos, this@ViewHolder)
-//            }
-//            buttonFavourites.setOnClickListener {
-//                presenter.buttonFavouritesClicked()
-//                 поменять изображение
-//            }
-
-        }
-
         override fun setTitle(text: String) = with(vb) {
             tvTitleArtistTrack.text = "Трек: $text"
             tvTitleArtistTrack.isSelected = true
@@ -40,18 +29,6 @@ class ArtistTracksRVAdapter(val presenter: ITrackListItemPresenter) :
         override fun setAlbum(title: String) = with(vb) {
             tvAlbum.text = "Альбом: $title"
             tvAlbum.isSelected = true
-        }
-
-//        override fun loadCover(url: String) = with(vb) {
-//            imageLoader.load(url, ivAlbum)
-//        }
-
-        override fun seekbarMax(duration: Int) {
-
-        }
-
-        override fun seekbarProgress(progress: Int) {
-            TODO("Not yet implemented")
         }
     }
 
