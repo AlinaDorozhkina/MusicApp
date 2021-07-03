@@ -8,6 +8,6 @@ import kotlinx.android.parcel.Parcelize
 data class Artist(
     @Expose val id: Int,
     @Expose var name: String,
-    @Expose val picture: String,
+    @Expose val picture_medium: String,
     @Expose val tracklist: String
 ) : Parcelable

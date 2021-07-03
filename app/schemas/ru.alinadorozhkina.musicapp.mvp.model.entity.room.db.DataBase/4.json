@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 4,
-    "identityHash": "a3cfbcefa0bc4532645ff23a05704569",
+    "identityHash": "4b85479885edbc06a1fcacc24eb21e56",
     "entities": [
       {
         "tableName": "RoomTrack",
@@ -68,7 +68,7 @@
       },
       {
         "tableName": "RoomArtistTrack",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`room_artist_id` INTEGER NOT NULL, `track_title` TEXT NOT NULL, `duration` INTEGER NOT NULL, `artistId` TEXT NOT NULL, `id` INTEGER NOT NULL, `title` TEXT NOT NULL, `cover` TEXT NOT NULL, PRIMARY KEY(`room_artist_id`), FOREIGN KEY(`artistId`) REFERENCES `RoomArtist`(`artist_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`room_artist_id` INTEGER NOT NULL, `track_title` TEXT NOT NULL, `duration` INTEGER NOT NULL, `artistId` TEXT NOT NULL, `preview` TEXT NOT NULL, `id` INTEGER NOT NULL, `title` TEXT NOT NULL, `cover` TEXT NOT NULL, PRIMARY KEY(`room_artist_id`), FOREIGN KEY(`artistId`) REFERENCES `RoomArtist`(`artist_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "id",
@@ -91,6 +91,12 @@
           {
             "fieldPath": "artistId",
             "columnName": "artistId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "preview",
+            "columnName": "preview",
             "affinity": "TEXT",
             "notNull": true
           },
@@ -202,7 +208,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a3cfbcefa0bc4532645ff23a05704569')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4b85479885edbc06a1fcacc24eb21e56')"
     ]
   }
 }

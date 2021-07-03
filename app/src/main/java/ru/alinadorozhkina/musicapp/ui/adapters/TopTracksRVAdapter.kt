@@ -1,14 +1,17 @@
 package ru.alinadorozhkina.musicapp.ui.adapters
 
+import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import ru.alinadorozhkina.helper.getColorRes
 import ru.alinadorozhkina.musicapp.databinding.ItemViewBinding
 import ru.alinadorozhkina.musicapp.mvp.model.image.IImageLoader
-import ru.alinadorozhkina.musicapp.mvp.model.view.list.ITopTracksItemView
+import ru.alinadorozhkina.musicapp.mvp.views.list.list.ITopTracksItemView
 import ru.alinadorozhkina.musicapp.mvp.presenter.list.ITopTracksListPresenter
+import ru.alinadorozhkina.musicapp.ui.App
 import javax.inject.Inject
 
 class TopTracksRVAdapter(val presenter: ITopTracksListPresenter) :
@@ -16,6 +19,8 @@ class TopTracksRVAdapter(val presenter: ITopTracksListPresenter) :
 
     @Inject
     lateinit var imageLoader: IImageLoader<ImageView>
+    @Inject
+    lateinit var context: App
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
@@ -41,6 +46,9 @@ class TopTracksRVAdapter(val presenter: ITopTracksListPresenter) :
 
     inner class ViewHolder(val vb: ItemViewBinding) : RecyclerView.ViewHolder(vb.root),
         ITopTracksItemView {
+
+        private var flag = false
+
         override fun init() = with(vb) {
             buttonPlay.setOnClickListener {
                 presenter.playClicked(pos, this@ViewHolder)
@@ -48,20 +56,28 @@ class TopTracksRVAdapter(val presenter: ITopTracksListPresenter) :
             buttonStop.setOnClickListener {
                 presenter.stopClicked()
             }
+
+            buttonFavourites.setOnClickListener {
+                presenter.favouritesClicked(pos)
+                // поменять изображение
+            }
         }
 
         override fun setTitle(title: String) = with(vb) {
-            tvTitle.isSelected = true
             tvTitle.text = title
+            tvTitle.isSelected = true
         }
 
         override fun setPosition(position: Int) = with(vb) {
             tvPosition.text = position.toString()
+            cardContainer.background = getColorRes(context, position)
+            //cardContainer.setCardBackgroundColor(getColorRes(context, position))
         }
 
         override fun setArtist(artist: String) = with(vb) {
             tvTitle.isSelected = true
             tvArtist.text = artist
+            tvArtist.isSelected = true
         }
 
         override fun loadPoster(url: String) = with(vb) {

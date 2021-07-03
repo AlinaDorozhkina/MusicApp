@@ -14,11 +14,13 @@ import ru.alinadorozhkina.musicapp.mvp.model.entity.Artist
 )
 data class RoomArtistTrack(
     @PrimaryKey
-    @ColumnInfo(name = "room_artist_id") val id: Int,
+    @ColumnInfo(name = "room_artist_id")
+    val id: Int,
     @ColumnInfo(name = "track_title")
     val title: String,
     @Embedded
     val album: Album,
     val duration: Int,
-    var artistId: String
+    var artistId: String,
+    var preview: String
 )

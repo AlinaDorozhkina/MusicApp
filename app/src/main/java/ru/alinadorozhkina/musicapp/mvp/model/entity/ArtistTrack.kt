@@ -11,4 +11,5 @@ data class ArtistTrack(
     @Expose val artist: Artist,
     @Expose val album: Album,
     @Expose val duration: Int,
+    @Expose val preview: String
 ) : Parcelable

@@ -9,4 +9,5 @@ import ru.alinadorozhkina.musicapp.mvp.model.entity.Track
 
 interface ITrackListRepo {
     fun getTrackList(artist: Artist): Single<ArtistTrackList>
+    fun getTrackList(artist: String?): Single<ArtistTrackList>
 }

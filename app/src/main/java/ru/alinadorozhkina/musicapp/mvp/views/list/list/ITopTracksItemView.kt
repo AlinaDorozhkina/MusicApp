@@ -1,4 +1,4 @@
-package ru.alinadorozhkina.musicapp.mvp.model.view.list
+package ru.alinadorozhkina.musicapp.mvp.views.list.list
 
 interface ITopTracksItemView : IItemView {
     fun init ()

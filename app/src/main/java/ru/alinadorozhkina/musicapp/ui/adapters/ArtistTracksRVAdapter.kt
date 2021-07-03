@@ -4,10 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import ru.alinadorozhkina.musicapp.R
 import ru.alinadorozhkina.musicapp.databinding.TrackItemViewBinding
 import ru.alinadorozhkina.musicapp.mvp.model.image.IImageLoader
-import ru.alinadorozhkina.musicapp.mvp.model.view.list.ITrackListItemView
+import ru.alinadorozhkina.musicapp.mvp.views.list.list.ITrackListItemView
 import ru.alinadorozhkina.musicapp.mvp.presenter.list.ITrackListItemPresenter
 import javax.inject.Inject
 
@@ -19,23 +18,18 @@ class ArtistTracksRVAdapter(val presenter: ITrackListItemPresenter) :
 
     inner class ViewHolder(val vb: TrackItemViewBinding) : RecyclerView.ViewHolder(vb.root),
         ITrackListItemView {
-        override fun setTitle(text: String) = with(vb) {
-            tvAlbum.isSelected = true
-            tvTitleArtistTrack.text = "Трек: $text"
-
-        }
-
-        override fun setAlbum(title: String) = with(vb) {
-            tvAlbum.isSelected = true
-            tvAlbum.text = "Альбом: $title"
-        }
-
-        override fun loadCover(url: String) = with(vb) {
-            imageLoader.load(url, ivAlbum)
-        }
 
         override var pos = -1
 
+        override fun setTitle(text: String) = with(vb) {
+            tvTitleArtistTrack.text = "Трек: $text"
+            tvTitleArtistTrack.isSelected = true
+        }
+
+        override fun setAlbum(title: String) = with(vb) {
+            tvAlbum.text = "Альбом: $title"
+            tvAlbum.isSelected = true
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =

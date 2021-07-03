@@ -19,15 +19,22 @@ class RoomTrackListCache(val db: DataBase): ITrackListCache {
             db.artistDao.findByName(it)
         }
         db.artistTrackListDao.findForArtist(roomArtistTrack.id.toString()).map {
-            ArtistTrack(it.id, it.title, artist, it.album, it.duration)
+            ArtistTrack(it.id, it.title, artist, it.album, it.duration, it.preview)
         }.let {
             ArtistTrackList(it, it.size)
         }
     }.subscribeOn(Schedulers.io())
 
     override fun putArtistTrackList(artist: Artist, artistTrackList: ArtistTrackList) = Completable.fromAction{
-        val art = RoomArtist(artist.id, artist.name, artist.picture, artist.tracklist)
-        db.artistDao.insert(art)
+        Log.v("RoomTrackListCashe", artistTrackList.data.toString())
+        //val art = RoomArtist(artist.id, artist.name, artist.picture, artist.tracklist)
+        val a = RoomArtist(
+            artistTrackList.data[0].artist.id,
+            artistTrackList.data[0].artist.name,
+            artistTrackList.data[0].artist.picture_medium,
+            artistTrackList.data[0].artist.tracklist,
+        )
+        db.artistDao.insert(a)
         val roomArtist =
             artist.name.let { db.artistDao.findByName(it) }
         val roomArtistTrack = artistTrackList.data.map {
@@ -36,7 +43,8 @@ class RoomTrackListCache(val db: DataBase): ITrackListCache {
                 it.title,
                 it.album,
                 it.duration,
-                roomArtist.id.toString()
+                roomArtist.id.toString(),
+                it.preview
             )
         }
         db.artistTrackListDao.getArtistTracks().let {
@@ -51,7 +59,7 @@ class RoomTrackListCache(val db: DataBase): ITrackListCache {
     }.subscribeOn(Schedulers.io())
 
     override fun putArtist(artist: Artist) = Completable.fromAction{
-        val art = RoomArtist(artist.id, artist.name, artist.picture, artist.tracklist)
+        val art = RoomArtist(artist.id, artist.name, artist.picture_medium, artist.tracklist)
         db.artistDao.insert(art)
     }.subscribeOn(Schedulers.io())
 
