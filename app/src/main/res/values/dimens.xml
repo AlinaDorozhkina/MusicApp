@@ -4,6 +4,7 @@
     <dimen name="margin_padding_size_small">8dp</dimen>
     <dimen name="margin_padding_size_medium">16dp</dimen>
     <dimen name="margin_padding_size_large">24dp</dimen>
+    <dimen name="margin_padding_size_max">64dp</dimen>
 
     <dimen name="header_text">45sp</dimen>
     <dimen name="title_text">30sp</dimen>
@@ -13,6 +14,9 @@
     <dimen name="icon_size">40dp</dimen>
     <dimen name="image_size">80dp</dimen>
 
-    <dimen name="match_constraint_0dp">0dp</dimen>
+    <dimen name="image_toolbar">300dp</dimen>
+    <dimen name="bottom_sheet_poster">150dp</dimen>
+    <dimen name="peekHeight">50dp</dimen>
+    <dimen name="card_corner">8dp</dimen>
 
 </resources>

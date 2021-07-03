@@ -1,14 +1,12 @@
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cardContainer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:backgroundTint="?attr/colorSecondaryVariant"
     app:cardCornerRadius="8dp"
     app:cardElevation="8dp"
-    app:cardUseCompatPadding="true"
-    android:backgroundTint="?attr/colorSecondaryVariant"
-    >
+    app:cardUseCompatPadding="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,30 +18,22 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-
             <TextView
                 android:id="@+id/tv_title_artist_track"
-                app:layout_constraintStart_toStartOf="parent"
+                style="@style/ScrollingText"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:text="трек"
-                style="@style/ScrollingText" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tv_album"
+                style="@style/ScrollingText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_title_artist_track"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:ellipsize="marquee"
-                android:marqueeRepeatLimit="marquee_forever"
                 android:padding="@dimen/margin_padding_size_small"
-                android:scrollHorizontally="true"
-                android:singleLine="true"
-                style="@style/BaseText.main_text"
-                android:text="альбом"/>
-
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_title_artist_track" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

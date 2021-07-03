@@ -68,30 +68,4 @@
         <item name="android:layout_height">@dimen/icon_size</item>
     </style>
 
-    <style name="ConstraintCenterHorizontalStyle">
-        <item name="layout_constraintLeft_toLeftOf">parent</item>
-        <item name="layout_constraintStart_toStartOf">parent</item>
-        <item name="layout_constraintEnd_toEndOf">parent</item>
-        <item name="layout_constraintRight_toRightOf">parent</item>
-    </style>
-
-    <!-- Style to align the View component under ConstraintLayout to the Top in center_horizontal format -->
-    <style name="ConstraintTopCenterHorizontalStyle" parent="ConstraintCenterHorizontalStyle">
-        <item name="layout_constraintTop_toTopOf">parent</item>
-    </style>
-
-    <style name="PlayerFullExtraControlsStateImageButtonsStyle">
-        <item name="android:layout_width">10dp</item>
-        <item name="android:layout_height">10dp</item>
-        <item name="android:layout_marginRight">10dp</item>
-        <item name="android:layout_marginEnd" >10dp</item>
-        <item name="android:background">@drawable/player_buttons_background</item>
-    </style>
-
-    <style name="PlayerFullExtraControlsImageButtonsStyle" parent="Widget.AppCompat.Button.Borderless">
-        <item name="android:layout_width">36dp</item>
-        <item name="android:layout_height">36dp</item>
-        <item name="android:layout_marginRight">16dp</item>
-    </style>
-
 </resources>

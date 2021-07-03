@@ -12,8 +12,6 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import kotlinx.android.synthetic.main.bottom_sheet_layout.view.*
-import kotlinx.android.synthetic.main.fragment_artist_info.*
 import kotlinx.android.synthetic.main.layout_main_player.*
 import kotlinx.android.synthetic.main.layout_main_player.view.*
 import moxy.MvpAppCompatFragment

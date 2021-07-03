@@ -30,7 +30,6 @@
             style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/pink_theme"
             android:backgroundTint="@color/pink_main"/>
 
         <com.google.android.material.chip.Chip
@@ -38,15 +37,13 @@
             style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/blue_theme"
             android:backgroundTint="@color/purple_main"/>
 
         <com.google.android.material.chip.Chip
             android:id="@+id/dark_theme"
             style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/night_theme" />
+            android:layout_height="wrap_content" />
 
     </com.google.android.material.chip.ChipGroup>
 
@@ -55,8 +52,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_padding_size_medium"
-        app:cornerRadius="10dp"
-        android:text="@string/confirm_button"
+        app:cornerRadius="@dimen/card_corner"
         android:backgroundTint="?attr/colorSecondaryVariant"/>
 
 </LinearLayout>
