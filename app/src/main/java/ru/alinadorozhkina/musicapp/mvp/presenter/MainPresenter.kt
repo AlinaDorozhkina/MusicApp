@@ -13,7 +13,8 @@ class MainPresenter: MvpPresenter<MainView>() {
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        router.replaceScreen(screens.topList())
+       // router.replaceScreen(screens.topList())
+        router.replaceScreen(screens.root())
     }
     fun backClicked() {
         router.exit()

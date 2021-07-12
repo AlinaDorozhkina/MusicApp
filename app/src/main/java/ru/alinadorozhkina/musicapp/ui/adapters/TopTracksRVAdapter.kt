@@ -1,6 +1,5 @@
 package ru.alinadorozhkina.musicapp.ui.adapters
 
-import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.alinadorozhkina.helper.getColorRes
 import ru.alinadorozhkina.musicapp.databinding.ItemViewBinding
 import ru.alinadorozhkina.musicapp.mvp.model.image.IImageLoader
-import ru.alinadorozhkina.musicapp.mvp.views.list.list.ITopTracksItemView
 import ru.alinadorozhkina.musicapp.mvp.presenter.list.ITopTracksListPresenter
+import ru.alinadorozhkina.musicapp.mvp.views.list.list.ITopTracksItemView
 import ru.alinadorozhkina.musicapp.ui.App
 import javax.inject.Inject
 

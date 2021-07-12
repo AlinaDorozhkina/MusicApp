@@ -39,9 +39,13 @@
         C29.199,19.8828338 31.036,19 32.95,19 C36.3435,19 39,21.6321526 39,24.9945504
         C39,29.1089918 35.26,32.4713896 29.595,37.5667575 L28,39 L28,39 Z</string>
 
-    <string name="clip_heart_hidden" >M18 37 L38 37 L38 37 L18 37 Z</string>
+    <string name="clip_heart_hidden">M18 37 L38 37 L38 37 L18 37 Z</string>
     <string name="path_name_heart_clip">clip</string>
     <string name="clip_heart_shown" translatable="false">M0 0 L56 0 L56 56 L0 56 Z</string>
     <string name="confirm">Подтвердить</string>
     <string name="dark_theme">Темная</string>
+    <string name="chart">Чарт</string>
+    <string name="radio">Жанры и лучшие треки</string>
+    <string name="Genres">Жанры</string>
+    <string name="choose_genre">Лучшие треки по темам</string>
 </resources>

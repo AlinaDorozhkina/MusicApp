@@ -39,7 +39,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         when (theme) {
             "pink" -> setTheme(R.style.Theme_MusicApp_Pink)
             "blue" -> setTheme(R.style.Theme_MusicApp_Blue)
-            "night" -> setTheme(R.style.Theme_MusicApp_Night)
+            "night" -> setTheme(R.style.Theme_MusicApp_Blue)
         }
 
         ui = ActivityMainBinding.inflate(layoutInflater)

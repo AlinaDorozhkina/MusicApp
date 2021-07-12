@@ -1,4 +1,4 @@
-package ru.alinadorozhkina.musicapp.ui.fragments
+package ru.alinadorozhkina.musicapp.ui.fragments.tabsFragments
 
 import android.graphics.Bitmap
 import android.os.Bundle
