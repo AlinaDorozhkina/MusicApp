@@ -17,7 +17,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingStart="10dp"
-            android:paddingEnd="10dp">
+            android:paddingEnd="10dp"
+            app:layoutDescription="@xml/motion_scene">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/deezer_button"
@@ -25,7 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="10dp"
-                android:visibility="gone"
+                android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="@+id/input_layout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/input_layout"
@@ -34,19 +35,19 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/input_layout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:background="@color/grey_dark"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:background="@color/grey_dark"
                 android:hint="@string/search_deezer"
-                app:hintTextColor="@color/white"
                 app:counterEnabled="true"
                 app:counterMaxLength="20"
+                app:endIconCheckable="true"
+                app:endIconDrawable="@drawable/deezer2"
                 app:endIconMode="custom"
-                app:endIconDrawable = "@drawable/deezer2"
-                app:endIconTintMode="multiply"
+                app:helperText="@string/hint_deezer"
+                app:hintTextColor="@color/white"
                 app:layout_constraintBottom_toTopOf="@+id/artist_name"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
+                app:layout_constraintStart_toEndOf="parent">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/input_edit_text"
@@ -54,31 +55,31 @@
                     android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/artist_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/BaseText.header_text"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/input_layout"/>
-
+            <TextView
+                android:id="@+id/artist_name"
+                style="@style/BaseText.header_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/input_layout"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_artist_tracks"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_padding_size_small"
                 android:clipToPadding="false"
-                tools:listitem = "@layout/track_item_view"
+                tools:listitem="@layout/track_item_view"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/artist_name"
-                />
+                app:layout_constraintTop_toBottomOf="@id/artist_name"/>
 
         </androidx.constraintlayout.motion.widget.MotionLayout>
 
     </androidx.core.widget.NestedScrollView>
-    <include layout="@layout/layout_main_player"/>
+
+    <include layout="@layout/layout_main_player" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

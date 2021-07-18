@@ -1,5 +1,6 @@
 package ru.alinadorozhkina.musicapp.ui.fragments.tabsFragments
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -13,12 +14,15 @@ import ru.alinadorozhkina.musicapp.databinding.FragmentWithTabsBinding
 import ru.alinadorozhkina.musicapp.mvp.model.entity.Track
 import ru.alinadorozhkina.musicapp.mvp.presenter.FragmentWithTabsPresenter
 import ru.alinadorozhkina.musicapp.mvp.views.FragmentTabsView
+import ru.alinadorozhkina.musicapp.ui.App
 
 private const val TRACK_VALUE = "track_value"
 
 class FragmentWithTabs : MvpAppCompatFragment(), FragmentTabsView {
 
-    private val presenter by moxyPresenter { FragmentWithTabsPresenter() }
+    private val presenter by moxyPresenter { FragmentWithTabsPresenter(track).apply {
+        App.instance.appComponent.inject(this)
+    } }
     private val track: Track?
         get() = arguments?.getParcelable(TRACK_VALUE)
     private var ui: FragmentWithTabsBinding? = null
@@ -59,6 +63,10 @@ class FragmentWithTabs : MvpAppCompatFragment(), FragmentTabsView {
                 }.attach()
             }
         }
+    }
+
+    override fun setImageOnToolbar(decodeByteArray: Bitmap) {
+        ui?.toolbarArtistImage?.setImageBitmap(decodeByteArray)
     }
 
     companion object {

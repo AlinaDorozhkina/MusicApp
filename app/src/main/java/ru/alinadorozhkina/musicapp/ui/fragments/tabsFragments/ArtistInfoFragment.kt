@@ -1,6 +1,5 @@
 package ru.alinadorozhkina.musicapp.ui.fragments.tabsFragments
 
-import android.graphics.Bitmap
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -18,6 +17,7 @@ import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import ru.alinadorozhkina.musicapp.R
 import ru.alinadorozhkina.musicapp.databinding.FragmentArtistInfoBinding
+import ru.alinadorozhkina.musicapp.databinding.FragmentArtistInfoStartBinding
 import ru.alinadorozhkina.musicapp.mvp.model.entity.ArtistTrack
 import ru.alinadorozhkina.musicapp.mvp.model.image.IImageLoader
 import ru.alinadorozhkina.musicapp.mvp.presenter.ArtistPresenter
@@ -36,7 +36,7 @@ class ArtistInfoFragment : MvpAppCompatFragment(), ArtistView {
     @Inject
     lateinit var imageLoader: IImageLoader<ImageView>
 
-    private var ui: FragmentArtistInfoBinding? = null
+    private var ui: FragmentArtistInfoStartBinding? = null
 
     private val presenter by moxyPresenter {
         val artist = arguments?.getString(ARTIST_VALUE) ?: RuntimeException(" ошибка, ")
@@ -54,7 +54,7 @@ class ArtistInfoFragment : MvpAppCompatFragment(), ArtistView {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = FragmentArtistInfoBinding.inflate(inflater, container, false).also {
+    ) = FragmentArtistInfoStartBinding.inflate(inflater, container, false).also {
         ui = it
     }.root
 
@@ -90,10 +90,6 @@ class ArtistInfoFragment : MvpAppCompatFragment(), ArtistView {
 
     override fun setArtistName(name: String) {
         ui?.artistName?.text = name
-    }
-
-    override fun setArtistPicture(bitmap: Bitmap) {
-        ui?.toolbarArtistImage?.setImageBitmap(bitmap)
     }
 
     override fun init() {
@@ -151,10 +147,6 @@ class ArtistInfoFragment : MvpAppCompatFragment(), ArtistView {
 
     override fun seekbarProgress(progress: Int) {
         seekbar.progress = progress
-    }
-
-    override fun updatePicture(url: String) {
-        ui?.toolbarArtistImage?.let { imageLoader.load(url, it) }
     }
 
     private fun setBottomSheetBehavior(bottomSheet: ConstraintLayout) {

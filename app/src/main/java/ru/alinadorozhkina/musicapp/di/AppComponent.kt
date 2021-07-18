@@ -49,4 +49,5 @@ interface AppComponent {
     fun inject (tracksByGenreFragment: TracksByGenreFragment)
     fun inject (tracksByGenrePresenter: TracksByGenrePresenter)
     fun inject (tracksByGenreListPresenter: TracksByGenrePresenter.TracksByGenreListPresenter)
+    fun inject (fragmentWithTabsPresenter: FragmentWithTabsPresenter)
 }
