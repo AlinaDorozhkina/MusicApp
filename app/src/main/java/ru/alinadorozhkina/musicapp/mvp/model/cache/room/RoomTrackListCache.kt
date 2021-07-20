@@ -21,7 +21,8 @@ class RoomTrackListCache(val db: DataBase): ITrackListCache {
         db.artistTrackListDao.findForArtist(roomArtistTrack.id.toString()).map {
             ArtistTrack(it.id, it.title, artist, it.album, it.duration, it.preview)
         }.let {
-            ArtistTrackList(it, it.size)
+            //ArtistTrackList(it, it.size)
+            ArtistTrackList(it)
         }
     }.subscribeOn(Schedulers.io())
 

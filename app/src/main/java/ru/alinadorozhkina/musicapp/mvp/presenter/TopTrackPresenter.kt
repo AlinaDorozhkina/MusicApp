@@ -37,8 +37,8 @@ class TopTrackPresenter : MvpPresenter<TopTrackView>() {
         loadTracks()
 
         topTrackListPresenter.itemClickListener = { itemView ->
-            val artist = topTrackListPresenter.tracks[itemView.pos].artist.name
-            router.navigateTo(screens.search(artist))
+            val track = topTrackListPresenter.tracks[itemView.pos]
+            router.navigateTo(screens.fragmentWithTabs(track))
         }
     }
 
@@ -46,8 +46,8 @@ class TopTrackPresenter : MvpPresenter<TopTrackView>() {
         val disposable = topTracksRepoRetrofit.getTopTracks()
             .observeOn(uiScheduler)
             .subscribe({
-                it.data.let { it1 ->
-                    topTrackListPresenter.tracks.addAll(it1)
+                it.data.let {  listOfTracks ->
+                    topTrackListPresenter.tracks.addAll(listOfTracks)
                     viewState.setTopTrackAmount(it.total)
                     viewState.updateList()
                 }

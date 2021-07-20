@@ -53,7 +53,6 @@ class ArtistPresenter(val artist: String) : MvpPresenter<ArtistView>() {
                 .subscribe({ artistTrackList ->
                     artistTrackList.data.let { list ->
                         trackListPresenter.tracks.addAll(list)
-                        getPicture(list[0].artist.picture_medium)
                         viewState.updateList()}
                 }, {
                     Log.v("Presenter", "ошибка" + it.message)
@@ -72,7 +71,6 @@ class ArtistPresenter(val artist: String) : MvpPresenter<ArtistView>() {
                     artistTrackList.data.let { list ->
                         trackListPresenter.tracks.clear()
                         trackListPresenter.tracks.addAll(list)
-                        viewState.updatePicture(list[0].artist.picture_medium)
                         viewState.updateList()
                         viewState.setArtistName(name)}
                 }, {
@@ -85,20 +83,6 @@ class ArtistPresenter(val artist: String) : MvpPresenter<ArtistView>() {
             val track: ArtistTrack = trackListPresenter.tracks[it.pos]
             viewState.playArtistTrack(track)
         }
-    }
-
-     private fun getPicture(url: String) {
-         val disposable =  url.let {
-             Log.v(TAG, url)
-             imageCache.getBytes(it)
-                 .observeOn(uiSchedular)
-                 .subscribe {
-                     it?.let { byteArray ->
-                         viewState.setArtistPicture(BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size))
-                     }
-                 }
-         }
-         compositeDisposable.add(disposable)
     }
 
     override fun onDestroy() {

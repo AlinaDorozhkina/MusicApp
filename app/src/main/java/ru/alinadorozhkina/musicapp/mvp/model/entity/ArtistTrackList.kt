@@ -6,6 +6,5 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class ArtistTrackList(
-    @Expose val data: List<ArtistTrack>,
-    @Expose val total: Int
+    @Expose val data: List<ArtistTrack>
 ) : Parcelable

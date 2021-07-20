@@ -2,11 +2,12 @@ package ru.alinadorozhkina.musicapp.api
 
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Query
 import retrofit2.http.Url
 import ru.alinadorozhkina.musicapp.mvp.model.entity.ArtistTrackList
 import ru.alinadorozhkina.musicapp.mvp.model.entity.Chart
+import ru.alinadorozhkina.musicapp.mvp.model.entity.Genre
+import ru.alinadorozhkina.musicapp.mvp.model.entity.Type
 
 interface IDataSource {
 
@@ -18,5 +19,8 @@ interface IDataSource {
 
     @GET("/search")
     fun getArtistTracks(@Query("q") name: String?): Single<ArtistTrackList>
+
+    @GET("/genre/0/radios")
+    fun getTracksByGenre(): Single <Genre>
 
 }
