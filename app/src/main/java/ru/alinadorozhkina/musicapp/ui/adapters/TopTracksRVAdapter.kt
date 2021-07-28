@@ -46,7 +46,7 @@ class TopTracksRVAdapter(val presenter: ITopTracksListPresenter) :
     inner class ViewHolder(val vb: ItemViewBinding) : RecyclerView.ViewHolder(vb.root),
         ITopTracksItemView {
 
-        private var flag = false
+        private var isButtonFavouritesSelected = false
 
         override fun init() = with(vb) {
             buttonPlay.setOnClickListener {
@@ -57,8 +57,16 @@ class TopTracksRVAdapter(val presenter: ITopTracksListPresenter) :
             }
 
             buttonFavourites.setOnClickListener {
-                presenter.favouritesClicked(pos)
-                // поменять изображение
+                    if (!isButtonFavouritesSelected){
+                        it.isSelected = true
+                        isButtonFavouritesSelected = true
+                        presenter.favouritesClicked(pos)
+                    } else {
+                        it.isSelected = false
+                        isButtonFavouritesSelected = false
+                        presenter.favouritesDelete(pos)
+
+                    }
             }
         }
 

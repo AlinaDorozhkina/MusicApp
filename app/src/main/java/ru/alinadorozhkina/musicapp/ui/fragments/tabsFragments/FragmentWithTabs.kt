@@ -3,9 +3,12 @@ package ru.alinadorozhkina.musicapp.ui.fragments.tabsFragments
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayoutMediator
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
@@ -19,6 +22,8 @@ import ru.alinadorozhkina.musicapp.ui.App
 private const val TRACK_VALUE = "track_value"
 
 class FragmentWithTabs : MvpAppCompatFragment(), FragmentTabsView {
+
+
 
     private val presenter by moxyPresenter { FragmentWithTabsPresenter(track).apply {
         App.instance.appComponent.inject(this)
@@ -34,6 +39,8 @@ class FragmentWithTabs : MvpAppCompatFragment(), FragmentTabsView {
     ) = FragmentWithTabsBinding.inflate(inflater, container, false).also {
         ui = it
     }.root
+
+
 
     override fun init() {
         track?.let {
@@ -66,8 +73,10 @@ class FragmentWithTabs : MvpAppCompatFragment(), FragmentTabsView {
     }
 
     override fun setImageOnToolbar(decodeByteArray: Bitmap) {
-        ui?.toolbarArtistImage?.setImageBitmap(decodeByteArray)
+       // ui?.toolbarArtistImage?.setImageBitmap(decodeByteArray)
     }
+
+
 
     companion object {
         fun newInstance(track: Track): FragmentWithTabs {

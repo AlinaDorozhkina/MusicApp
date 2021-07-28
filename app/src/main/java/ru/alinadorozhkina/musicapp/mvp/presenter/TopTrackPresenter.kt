@@ -126,7 +126,12 @@ class TopTrackPresenter : MvpPresenter<TopTrackView>() {
 
         override fun favouritesClicked(position: Int) {
             val favourites = tracks[position]
-            Log.v("Favourites", favourites.toString())
+            Log.v("Favourites Add", favourites.toString())
+        }
+
+        override fun favouritesDelete(position: Int) {
+            val favouritesDelete = tracks[position]
+            Log.v("Favourites Delete", favouritesDelete.toString())
         }
     }
 

@@ -62,7 +62,7 @@
     <ImageButton
         android:id="@+id/ib_favourites"
         style="@style/MyIconButtonStyle"
-        android:src="@drawable/heart"
+        android:src="@drawable/favourites_button_selector"
 
         app:layout_constraintTop_toBottomOf="@id/bottom_sheet_poster"
         app:layout_constraintStart_toStartOf="parent"
@@ -98,13 +98,6 @@
             android:layout_marginEnd="@dimen/margin_padding_size_small"
             app:icon="@android:drawable/ic_media_pause" />
 
-
     </LinearLayout>
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/image_toolbar"
-        android:src="@drawable/record"
-        android:layout_marginTop="@dimen/margin_padding_size_medium"
-        app:layout_constraintTop_toBottomOf="@id/liner_for_player"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

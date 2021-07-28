@@ -64,10 +64,11 @@
             android:background="?attr/colorSecondaryVariant"
             android:orientation="horizontal">
 
-            <com.google.android.material.button.MaterialButton
+            <ImageButton
                 android:id="@+id/button_favourites"
                 style="@style/MyIconButtonStyle"
-                app:icon="@drawable/ic_baseline_favorite_border_24" />
+                android:src="@drawable/favourites_button_selector"
+                />
 
             <SeekBar
                 android:id="@+id/seekbar"

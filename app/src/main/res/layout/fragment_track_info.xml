@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         style="@style/BaseText.title_text_white"
         android:text="@string/hello_blank_fragment"
-        android:layout_margin="@dimen/margin_padding_size_max"
+        android:layout_margin="@dimen/margin_padding_size_medium"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -20,7 +20,7 @@
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:orientation="vertical"
-        android:layout_margin="@dimen/margin_padding_size_max"
+        android:layout_margin="@dimen/margin_padding_size_small"
         android:gravity="center"
         android:background="@drawable/ring_layout"
         app:layout_constraintTop_toBottomOf="@id/tv_song"

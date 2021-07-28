@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import ru.alinadorozhkina.musicapp.databinding.TopTracksFragmentBinding
@@ -24,6 +25,7 @@ class TopTracksFragment : MvpAppCompatFragment(), TopTrackView {
     private var ui: TopTracksFragmentBinding? = null
     private var adapter: TopTracksRVAdapter? = null
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -34,7 +36,7 @@ class TopTracksFragment : MvpAppCompatFragment(), TopTrackView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val context = activity as MainActivity
+
     }
 //        ui?.bottomNav?.setOnNavigationItemSelectedListener { item ->
 //            when (item.itemId) {

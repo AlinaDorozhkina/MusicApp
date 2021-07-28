@@ -79,10 +79,9 @@ class ArtistPresenter(val artist: String) : MvpPresenter<ArtistView>() {
                 })
         }
         compositeDisposable.add(disposable)
-        trackListPresenter.itemClickListener = {
-            val track: ArtistTrack = trackListPresenter.tracks[it.pos]
-            viewState.playArtistTrack(track)
-        }
+//        trackListPresenter.itemClickListener = {
+//            val track: ArtistTrack = trackListPresenter.tracks[it.pos]
+//            viewState.playArtistTrack(track)
     }
 
     override fun onDestroy() {
