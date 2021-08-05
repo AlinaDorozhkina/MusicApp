@@ -15,5 +15,6 @@ interface ITopListPresenter<V> {
     fun playClicked(position: Int,view: V)
     fun stopClicked()
     fun favouritesClicked(position: Int)
+    fun favouritesDelete(position: Int)
 
 }

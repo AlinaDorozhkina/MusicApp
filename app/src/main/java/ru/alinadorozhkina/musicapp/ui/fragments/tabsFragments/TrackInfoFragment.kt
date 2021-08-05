@@ -1,7 +1,8 @@
-package ru.alinadorozhkina.musicapp.ui.fragments
+package ru.alinadorozhkina.musicapp.ui.fragments.tabsFragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
@@ -20,6 +21,18 @@ class TrackInfoFragment : MvpAppCompatFragment(), TrackInfoView {
         val track = arguments?.getParcelable<Track>(TRACK_VALUE) as Track
         TrackInfoPresenter(track).apply {
             App.instance.appComponent.inject(this)
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        App.instance.appComponent.inject(this)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        ui?.buttonPlay?.setOnClickListener {
+            presenter.buttonPlayClicked()
         }
     }
 
@@ -44,5 +57,17 @@ class TrackInfoFragment : MvpAppCompatFragment(), TrackInfoView {
             f.arguments = args
             return f
         }
+    }
+
+    override fun setTrackTitle(title: String) {
+        ui?.tvSong?.text = title
+    }
+
+    override fun setArtistName(name: String) {
+        ui?.tvArtistName?.text = name
+    }
+
+    override fun setAlbumTitle(album: String) {
+        ui?.tvAlbumTitle?.text = album
     }
 }

@@ -1,9 +1,10 @@
 package ru.alinadorozhkina.helper
 
 import android.content.Context
-import android.content.res.TypedArray
+import android.content.res.Resources
+import android.graphics.Color
 import android.graphics.drawable.Drawable
-import android.util.TypedValue
+import android.util.DisplayMetrics
 import ru.alinadorozhkina.musicapp.R
 
 
@@ -20,8 +21,6 @@ fun getColorRes(context: Context, position: Int): Drawable = when (position) {
     3 -> context.resources.getDrawable(R.drawable.bronze_background)
     else -> context.resources.getDrawable(R.drawable.chart_all_background)
 }
-
-
 
 interface BackButtonListener {
     fun backPressed(): Boolean

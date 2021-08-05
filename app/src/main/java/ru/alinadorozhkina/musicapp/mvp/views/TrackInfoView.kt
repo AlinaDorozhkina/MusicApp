@@ -5,4 +5,8 @@ import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
 @StateStrategyType(AddToEndSingleStrategy::class)
-interface TrackInfoView: MvpView
+interface TrackInfoView: MvpView{
+    fun setTrackTitle(title: String)
+    fun setArtistName(name: String)
+    fun setAlbumTitle(album: String)
+}

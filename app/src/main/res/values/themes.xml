@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.MusicApp.Blue" parent="Theme.MaterialComponents.NoActionBar">
-        <item name="android:windowBackground">@color/background</item>
+        <item name="android:windowBackground">@drawable/background</item>
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_dark</item>
         <item name="colorPrimaryVariant">@color/purple_light</item>
